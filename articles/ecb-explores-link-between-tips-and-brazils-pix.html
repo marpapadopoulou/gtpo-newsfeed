@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t)})()</script>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transformation Digest | NBG</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="accent-line"></div>
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-left">
+      <div class="header-logo">NBG</div>
+      <div class="header-text">
+        <h1><a href="../index.html">Transformation Digest</a></h1>
+        <div class="subtitle">Corporate Transformation Division | National Bank of Greece</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="header-meta">
+        <div class="update-badge" id="current-date">07 Sep 2026</div>
+        <div>Last updated: 07 Sep 2026</div>
+      </div>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <span class="icon-sun">&#9788;</span>
+        <span class="icon-moon">&#9790;</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="detail-container">
+  <a href="../index.html" class="detail-back"><span>&larr;</span> Back to Digest</a>
+
+  <h1 class="detail-title">ECB explores link between Tips and Brazil&#x27;s Pix</h1>
+
+  <div class="detail-meta">
+    <span class="source-name">Finextra</span>
+    <span class="sep"></span>
+    <span>04 Sep 2026</span>
+    <span class="sep"></span>
+    <span>1 min read</span>
+  </div>
+
+  <div class="detail-topics">
+    <span class="tag">Corporate Banking</span>
+  </div>
+
+  <div class="detail-insight">
+    <div class="insight-label">Key Insight</div>
+    <p>Cross-border instant payment interoperability is becoming a geopolitical as well as a technical challenge — European banks should monitor how TIPS linkages evolve, as successful corridors could reshape wholesale and remittance flows, but timelines remain speculative and far from operational impact.</p>
+  </div>
+
+  <div class="detail-section-label">Full Article</div><div class="detail-article-body"><p class="drop-cap">The European Central Bank is looking into the possibility of interlinking the Eurosystem&#x27;s Target Instant Payment Settlement (Tips) with Brazil&#x27;s Pix system.</p>
+<p>In a statement to Reuters, the ECB confirmed that it and Brazil&#x27;s central bank are carrying out an ongoing preliminary investigation on the possibility of a link. A pilot project could be launched in 2028, says Reuters, citing sources.</p>
+<p>The move would reflect a wider effort by the Eurosystem to make it easier for businesses and consumers in Europe to send and receive payments to and from other countries, including remittances.</p>
+<p>Last year, the ECB began work to link Tips with India&#x27;s Unified Payment Interface and other real-time payment rails across Asia.</p>
+<p>The euro, Swedish krona and Danish krone are already available for settling payments in Tips, while the Norwegian krone is scheduled to join in 2028 and Iceland&#x27;s króna will follow.</p>
+<p>Launched in late 2020, Pix has proved a runaway success, used by 170 million people, 91% of Brazil&#x27;s adult population.</p>
+<p>In August, the central bank indicated that it was looking to expand the scope of Pix to integrate it with other international systems.</p>
+<p>However, the prospect has drawn American scrutiny amid concerns that the state-backed system could impact US firms and even reduce reliance on the dollar. The US government has called the central bank-run service &quot;unfair&quot; and has used it as justification for the imposition of new trade tariffs on Brazil.</p></div>
+
+  
+
+  <div class="detail-actions">
+    <a href="https://www.finextra.com/newsarticle/48350/ecb-explores-link-between-tips-and-brazils-pix?utm_medium=rssfinextra&amp;utm_source=finextrafeed" target="_blank" rel="noopener noreferrer" class="detail-cta">
+      Read Original Source <span class="arrow">&rarr;</span>
+    </a>
+    
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">National Bank of Greece &mdash; Corporate Transformation Division</div>
+    <div class="footer-right">
+      <span>Powered by AI-assisted curation</span>
+      <span class="footer-dot"></span>
+      <span>Internal use only</span>
+    </div>
+  </div>
+</footer>
+<script>
+function toggleTheme() {
+  var html = document.documentElement;
+  var next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+}
+(function(){
+  var d = document.getElementById('current-date');
+  if (d) {
+    var now = new Date();
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    d.textContent = String(now.getDate()).padStart(2,'0') + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
+  }
+})();
+</script>
+</body>
+</html>

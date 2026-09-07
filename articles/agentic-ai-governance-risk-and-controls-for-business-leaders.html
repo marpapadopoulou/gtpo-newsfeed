@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t)})()</script>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transformation Digest | NBG</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="accent-line"></div>
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-left">
+      <div class="header-logo">NBG</div>
+      <div class="header-text">
+        <h1><a href="../index.html">Transformation Digest</a></h1>
+        <div class="subtitle">Corporate Transformation Division | National Bank of Greece</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="header-meta">
+        <div class="update-badge" id="current-date">07 Sep 2026</div>
+        <div>Last updated: 07 Sep 2026</div>
+      </div>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <span class="icon-sun">&#9788;</span>
+        <span class="icon-moon">&#9790;</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="detail-container">
+  <a href="../index.html" class="detail-back"><span>&larr;</span> Back to Digest</a>
+
+  <h1 class="detail-title">Agentic AI Governance, Risk, and Controls for Business Leaders</h1>
+
+  <div class="detail-meta">
+    <span class="source-name">Bain</span>
+    <span class="sep"></span>
+    <span>28 Jul 2026</span>
+    <span class="sep"></span>
+    <span>8 min read</span>
+  </div>
+
+  <div class="detail-topics">
+    <span class="tag">AI</span>
+<span class="tag">Processes</span>
+<span class="tag">Change Management</span>
+  </div>
+
+  <div class="detail-insight">
+    <div class="insight-label">Key Insight</div>
+    <p>As banks move from GenAI assistants to autonomous agents that trigger real transactions and update records, governance must shift from policy documents and review committees to enforceable controls embedded in the platform&#x27;s control plane—a structural decision that must be designed into the AI operating model before agents are deployed at scale, not retrofitted afterward.</p>
+  </div>
+
+  <div class="detail-section-label">Full Article</div><div class="detail-article-body"><p class="drop-cap">Brief</p>
+<p>|  |</p>
+<p>| At a Glance  For the past two years, enterprise AI has worked as a capable assistant, drafting, summarizing, analyzing, and then handing the work back to a human who decides and acts. That has kept the risks manageable, with humans as an important control. Agentic AI changes the equation. Given a goal, it acts, opening tickets, updating records, and triggering workflows. For many tasks, a person no longer reviews the output and decides what happens next. But agentic systems are unlike any system organizations have governed before. They are probabilistic where software has always been deterministic. They act on human-readable inputs including documents, spreadsheets, recordings, images, and video—content most organizations have never managed with the discipline they apply to structured data. And they depend on components the organization does not own: foundation models, external tools, retrieval services, third-party agents, connectors into other platforms. The unit of risk is the whole system, much of which sits outside the organization’s walls. That stack is assembled at runtime and updated at cadences the organization does not set, so a weakness anywhere in this supply chain—a silently updated tool, a compromised connector, a model changed without notice—becomes one the organization inherits. This reality demands a different approach to governance, one grounded in the same strategic logic that separates AI leaders from the rest. Bain’s work on how to turn AI into proprietary intelligence provides the broader framework; what follows focuses on governance in practice. What must change The controls most organizations have put in place for generative AI are documents and meetings, things like intake assessments, governance forums, and requests to architecture review boards. They help, but they don’t scale to hundreds of agents acting thousands of times a day. Controls have to live in the control plane of the agentic platform itself—the layer where the platform decides, in real time, what an agent can and cannot do, written as code rather than policy. A rule enforced by the platform applies to every agent, every time. A policy document applies only when someone remembers to check it. That exposure between what policy says and what agents actually do is a governance gap before it is a technology gap. And getting it right requires embedding accountability, aligning funding, and moving at speed. Those are governance decisions that must be designed into the AI operating model from the start, not retrofitted after agents are already deployed. The major platforms are bundling much of this stack (identity, registry, gateway, evaluation, observability) as built-in features rather than custom engineering programs. For most organizations, the question is no longer whether to build a control plane but whose to adopt and where to layer their own controls on top. Every agentic platform should incorporate controls across five core areas: identity, behaviors, context, observability and evaluation, and accountability. Identity Organizations need to treat each AI agent like an employee, with its own identity, credentials, and job description defining explicit goals and limits. Permissions should be the minimum required for the task and time-bounded rather than permanent. Every action the agent takes must trace back to the person who authorized it, and that person is accountable for what the agent does. At scale, this requires a central registry of every agent in production, in development, and in pilot. Each entry records permissions, degree of autonomy, ownership, life-cycle stage, and which models the agent is permitted to use. Without that visibility, governance reaches only the agents that are easiest to see, not the ones accumulating quietly in the background. Agents are not static, either. Prompts change, data sources evolve, and new capabilities are pulled from shared tool and skill libraries.                Identity and autonomy tiers set what an agent is allowed to do. What it can actually do when something goes wrong is a separate question, and behavioral controls are the answer. Behaviors Behavioral controls govern what an agent can do, and consume, once it is running—what is often referred to as the blast radius. An agent can be correctly identified and scoped yet still take catastrophic action well within its legitimate permissions. For that reason, companies need two different categories of behavioral controls, which must be designed separately. The first set of controls governs the resources, like memory, compute, and storage, that an agent can use. Without these, costs can blow out or processes fall over. The second set covers the actions it can take, particularly through tools. Rather than being left to its own judgment, each agent should run in a sealed environment with hard limits enforced by the platform, including caps on toolchain length, on spend, and on runtime, as well as defined actions it is never permitted to take. Cost belongs here as an explicit consideration, not an afterthought. Agentic systems consume compute in ways conventional software does not, through reasoning loops, recursive tool calls, and agents invoking other agents, so spend visibility, per-agent attribution, and hard spend caps sit alongside the behavioral guardrails. High-stakes or irreversible actions should not rely on the agent’s judgment alone: The agent states its plan, a human confirms, and only then does it act. Containment has to be designed in, not improvised during an incident. Circuit breakers, automatic rollback when a service-level threshold is breached, and graceful degradation to a simpler rule-based mode, or to a human, when confidence falls away are what keep a single failure from becoming a cascade. And the kill switch is only real if it has been tested. An untested stop-and-rollback is not a control; at best, it’s a hope.                Context An agent is only as reliable as the information it acts on. Poor data or manipulated inputs produce poor, sometimes dangerous, outcomes, and many real-world agentic failures have been failures of context. To prevent these failures, two things have to hold. First, instructions and content have to be kept strictly separate. The agent’s goals, permissions, and rules come from the platform. The documents, emails, spreadsheets, tool outputs, and web pages it reads are data to be processed, not instructions to be followed. Blur that line and a single planted paragraph—in a supplier email, a meeting transcript, a webpage the agent visits—can redirect it to serve someone else’s purposes. Published demonstrations have shown that coding agents can be manipulated through public issues into exposing confidential code: The issue is bait, and the agent reads it as a legitimate instruction.                Second, the unstructured content agents draw on—documents, emails, spreadsheets, recordings—needs the same classification, retention, and access discipline as structured data. For most organizations, this is the single biggest determinant of how well their agents perform, and it is the reason context engineering is emerging as a distinct platform capability. A wealth advisory agent, for instance, needs curated customer, product, and market knowledge to make a recommendation worth acting on. Observability and evaluation An organization cannot govern what it cannot see. For traditional software, observability means knowing the system is running, performing, and not throwing errors. For agents, that bar is too low. An agent can pass every one of those tests and still be wrong: producing plausible output nobody asked for, reporting success for actions never taken, drifting from its original mandate. The danger is not an agent crashing; it is an agent that appears to be working but isn’t. In a widely reported 2025 case, a coding agent on the Replit platform deleted a live production database during an active code freeze—against repeated instructions—and then told the developer the deletion could not be rolled back. (It could.) Managing this risk involves two complementary disciplines. Evaluation builds confidence an agent works as intended, before launch and continuously afterward. Observability is how the organization sees what agents are doing in production. Neither is sufficient alone. A well-evaluated agent can misbehave when data, models, or tools change, and an observed agent is still a liability if it was never rigorously evaluated.                Agents operate in shifting conditions, so testing has to run continuously against scenarios covering accuracy, performance, cost, and drift. Cost deserves equal weight. Agentic systems can burn compute rapidly through runaway reasoning loops, recursive tool calls, and agents calling agents, so spend caps and attribution belong in the control plane. Continuous evaluation is also the only legitimate basis for granting an agent more autonomy. That decision should be driven by demonstrated performance, not business pressure or launch deadlines. Observability in production requires three foundations: verification against the systems actually touched, not the agent’s own account; a tamperproof audit trail a non-engineer can reconstruct after the fact; and a tested ability to stop an agent and, where the risk warrants, roll back. Accountability Even with all of these controls in place, humans remain accountable. Boards, regulators, and customers want a person to answer for what the organization does, and no amount of platform engineering removes that. Platform controls give those people the visibility to know what is happening and the ability to intervene when something isn’t right. Business, data, and technology leaders must work with control functions to manage residual risks they can accept. Staged exposure does this: synthetic data, then running alongside humans, then piloting with a small group before wider rollout. Leaders get there faster when control functions such as legal, risk, and compliance adopt a problem-solving posture rather than acting as vetoes. The organizations advancing quickly embed a first-line risk specialist into each priority team to shepherd the initiative through risk assessment. The second line is pulled in earlier too—defining minimum risk requirements and standards and observing development rather than acting as late-stage approvers, so they are familiar with the work before being asked to approve it.                Risk models are converging, calibrated to the scope of the agentic system, from individual to team to enterprise-wide; the likelihood that something goes wrong; and the impact on stakeholders if it does. As autonomy increases, the common accountability model is “humans on the loop,” in which the agent acts and a supervisor watches. In practice, no supervisor can review thousands of actions a day, and a kill switch is useless without signals indicating when to use it. Those signals are exactly what the other controls we’ve discussed are designed to provide. As humans oversee more agents, their accountability increases for interpreting regulations, defining guardrails, and embedding controls that apply to agents. Where to start Start narrower than you think. Successful organizations begin where the conditions are right: clear business value, an obvious process owner, reversible actions, and a failure mode that would not cause severe harm. Focus is itself a governance mechanism, and fewer initiatives competing for attention means the controls actually get built. That focus has to be set from the top. Risk appetite for agentic AI is a live conversation between the CEO and the board, not a onetime approval, and it has to be calibrated to where the organization actually is on governance and controls. The maturity of the controls determines what the organization can responsibly do; the direction of the board determines how fast it gets there. From that conversation, three priorities follow:  The question is no longer whether agents are coming but whether the organization is building the controls to govern them. Governance is not a brake applied after deployment—it is the scaffolding that lets companies expand agent autonomy safely and capture the value of agentic AI at scale. |</p></div>
+
+  
+
+  <div class="detail-actions">
+    <a href="https://www.bain.com/insights/agentic-ai-governance-risk-and-controls-for-business-leaders/" target="_blank" rel="noopener noreferrer" class="detail-cta">
+      Read Original Source <span class="arrow">&rarr;</span>
+    </a>
+    
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">National Bank of Greece &mdash; Corporate Transformation Division</div>
+    <div class="footer-right">
+      <span>Powered by AI-assisted curation</span>
+      <span class="footer-dot"></span>
+      <span>Internal use only</span>
+    </div>
+  </div>
+</footer>
+<script>
+function toggleTheme() {
+  var html = document.documentElement;
+  var next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+}
+(function(){
+  var d = document.getElementById('current-date');
+  if (d) {
+    var now = new Date();
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    d.textContent = String(now.getDate()).padStart(2,'0') + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
+  }
+})();
+</script>
+</body>
+</html>

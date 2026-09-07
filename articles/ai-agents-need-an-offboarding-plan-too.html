@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t)})()</script>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transformation Digest | NBG</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="accent-line"></div>
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-left">
+      <div class="header-logo">NBG</div>
+      <div class="header-text">
+        <h1><a href="../index.html">Transformation Digest</a></h1>
+        <div class="subtitle">Corporate Transformation Division | National Bank of Greece</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="header-meta">
+        <div class="update-badge" id="current-date">07 Sep 2026</div>
+        <div>Last updated: 07 Sep 2026</div>
+      </div>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <span class="icon-sun">&#9788;</span>
+        <span class="icon-moon">&#9790;</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="detail-container">
+  <a href="../index.html" class="detail-back"><span>&larr;</span> Back to Digest</a>
+
+  <h1 class="detail-title">AI Agents Need an Offboarding Plan Too</h1>
+
+  <div class="detail-meta">
+    <span class="source-name">Capgemini</span>
+    <span class="sep"></span>
+    <span>04 Sep 2026</span>
+    <span class="sep"></span>
+    <span>4 min read</span>
+  </div>
+
+  <div class="detail-topics">
+    <span class="tag">AI</span>
+<span class="tag">Processes</span>
+<span class="tag">Technology</span>
+  </div>
+
+  <div class="detail-insight">
+    <div class="insight-label">Key Insight</div>
+    <p>As banks embed AI agents into core processes, the real governance gap is not deployment but decommissioning — executives must treat AI agents as critical IT services with formal dependency mapping, defined kill-switch authority, and tested continuity plans before go-live, not after.</p>
+  </div>
+
+  <div class="detail-section-label">Full Article</div><div class="detail-article-body"><p class="drop-cap">If you want to launch AI-based services, you will find plenty of materials, guidelines, and best practices. But if you need to withdraw one from your IT estate, there is much less guidance on how to do it properly. The recent &quot;escapes&quot; of couple AI agents sparked an internal discussion in my team: what if your AI agents start acting in an uncontrolled way and you need to switch them off quickly?</p>
+<p>The IT sector has humanized artificial intelligence. AI-based solutions have gained a human aspect, probably because it is easier to embrace something new when we describe it using familiar language. We give AI agents human names. We say we train them, as we would train a junior colleague. We talk to them, ask them questions, and sometimes even say &quot;thank you.&quot;</p>
+<p>Because of that, we do not always think about the moment when, somewhere in the future, an AI agent may need to be decommissioned or, less gently, killed. However, AI agents are still IT services, and they need to be managed as such. Below, we share our thoughts on how to manage an AI agent across its lifecycle, including the moment when you may need to peacefully pull the plug.</p>
+<p>Because we assign human attributes to AI agents, we may forget that they are IT services and should be managed accordingly.</p>
+<p>Many articles today focus on the risks of implementing AI. But do you know the risks of losing an AI agent once your organization has started relying on it? What does this agent actually support? Which processes or services would be affected if you changed it, paused it, or removed it from the picture?</p>
+<p>Some agents support us every day with research, writing, or content creation. Others are far more sophisticated, operating quietly in the background and supporting autonomous infrastructure. If disconnected in an uncontrolled way or during an emergency, they may trigger a wave of incidents. The impact will depend on the type of agent and the role it plays: what it does, what it supports, and how deeply other services and processes depend on it. That is why, when designing an agent&#x27;s implementation, you should verify the following:</p>
+<p>Which business and IT services, service components, or configuration items are dependent on this agent? What is the cost and impact if the agent becomes unavailable? Who has the authority to pull the plug if necessary? Does the agent need redundancy or a backup plan that can be implemented immediately?</p>
+<p>If the answer to the final question is &quot;yes,&quot; make sure you allocate the right budget for maintaining and testing that backup plan as part of your Business Continuity Plan routine.</p>
+<p>Think about it in this way: in highly automated and orchestrated processes you are giving away execution to autonomous systems comprised of multiple AI agents. They do not have a fixed path to execute the task but can make decisions on which AI agents and tools to engage to achieve an outcome – to some extent. Almost like humans. But these AI agents do not have the world awareness, ethics and discernment that humans have. They can be tricked and exploited if the instructions are not precise enough and controls are not in place. Therefore, they cannot be treated in the same way as a human co-worker and require oversight: traceability of all objectives, instructions, limitations, roles, access to tools and data, and whether their performance remains within bounds. You can – and should – build technical safeguards, resilience and failover mechanisms. But, maybe in this one case you should consider a human perspective – what do you do when you need to handover a task between co-workers, when someone unexpectedly goes on leave of absence? What will you do if you need a human to take back a task from AI? Will you still have necessary documentation and instructions available? Do you know who can take over, even if only for a time? Will they have the necessary knowledge and tools?</p>
+<p>As you can see, managing the lifecycle of an AI agent requires a lot of information: business impact, configuration, cost, risk, ownership, dependencies, and more. This information needs to be controlled, structured, and easy to access. A traditional CMDB may no longer be enough to capture and process all the data required. It may need to evolve to capture AI-specific information such as model versions, permissions, tools, knowledge sources, autonomy levels, and dependencies. If you have not explored this area yet, consider looking at AI management and governance solutions. Just as importantly, leaders should understand the emerging frameworks that can help organizations define accountability, manage risk, and establish appropriate governance for AI agents. Finally, connect with your business continuity management team to manage the risk of handing over execution of a business process to AI agents and prepare for the crisis.</p>
+<p>In short, having AI embedded in your IT estate requires proper governance, management tools, and specialized knowledge. AI agents should be managed like any other IT service, with Service Management Office involvement and supervision from staff trained in AI governance frameworks. A well-maintained and accurate CMDB, supported by dedicated AI management solutions, can significantly improve risk assessment. If you understand what decommissioning an AI agent could affect, you can make an informed decision – and be ready if an emergency forces you to act fast.</p></div>
+
+  
+
+  <div class="detail-actions">
+    <a href="https://www.capgemini.com/insights/expert-perspectives/ai-agents-need-an-offboarding-plan-too/" target="_blank" rel="noopener noreferrer" class="detail-cta">
+      Read Original Source <span class="arrow">&rarr;</span>
+    </a>
+    
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">National Bank of Greece &mdash; Corporate Transformation Division</div>
+    <div class="footer-right">
+      <span>Powered by AI-assisted curation</span>
+      <span class="footer-dot"></span>
+      <span>Internal use only</span>
+    </div>
+  </div>
+</footer>
+<script>
+function toggleTheme() {
+  var html = document.documentElement;
+  var next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+}
+(function(){
+  var d = document.getElementById('current-date');
+  if (d) {
+    var now = new Date();
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    d.textContent = String(now.getDate()).padStart(2,'0') + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
+  }
+})();
+</script>
+</body>
+</html>

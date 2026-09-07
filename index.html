@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t)})()</script>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transformation Digest | NBG</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="accent-line"></div>
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-left">
+      <div class="header-logo">NBG</div>
+      <div class="header-text">
+        <h1><a href="index.html">Transformation Digest</a></h1>
+        <div class="subtitle">Corporate Transformation Division | National Bank of Greece</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="header-meta">
+        <div class="update-badge" id="current-date">07 Sep 2026</div>
+        <div>Last updated: 07 Sep 2026</div>
+      </div>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <span class="icon-sun">&#9788;</span>
+        <span class="icon-moon">&#9790;</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="hero" data-topics="AI,Processes,Technology">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-label">
+        <span class="dot"></span>
+        Featured Story
+      </div>
+      <h2>AI Agents Need an Offboarding Plan Too</h2>
+      <div class="hero-meta">
+        <span class="source">Capgemini</span>
+        <span class="sep"></span>
+        <span>04 Sep 2026</span>
+        <span class="sep"></span>
+        <a href="#" class="hero-tag" data-filter-topic="AI">AI</a> <a href="#" class="hero-tag" data-filter-topic="Processes">Processes</a> <a href="#" class="hero-tag" data-filter-topic="Technology">Technology</a>
+      </div>
+      <p class="hero-excerpt">This Capgemini article addresses the overlooked challenge of AI agent lifecycle management, specifically the decommissioning and offboarding of AI agents once they are embedded in operational processes. It argues that because organizations anthropomorphize AI agents, they neglect to plan for their removal or failure, creating hidden operational and business continuity risks. The piece offers a practical checklist for dependency mapping, impact assessment, authority designation, and backup planning for AI agents.</p>
+      <a href="articles/ai-agents-need-an-offboarding-plan-too.html" class="hero-cta">
+        Read Full Article
+        <span class="arrow">&rarr;</span>
+      </a>
+    </div>
+    <aside class="hero-sidebar">
+      <h3>This Edition at a Glance</h3>
+            <div class="quick-stat">
+        <span class="number">5</span>
+        <span class="qs-label">New articles this week</span>
+      </div>
+      <div class="quick-stat">
+        <span class="number">7</span>
+        <span class="qs-label">Topics covered</span>
+      </div>
+      <div class="quick-stat">
+        <span class="number">25%</span>
+        <span class="qs-label">Focus on AI</span>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<div class="filter-bar" id="filterBar">
+  <span class="filter-label">Filtered by:</span>
+  <span class="filter-tag" id="filterTag"></span>
+  <button class="filter-clear" id="filterClear">Clear filter</button>
+</div>
+<script>
+(function() {
+  var active = null;
+  var bar = document.getElementById('filterBar');
+  var tag = document.getElementById('filterTag');
+  var hero = document.querySelector('.hero');
+  var cards = document.querySelectorAll('.article-card');
+
+  function applyFilter(topic) {
+    active = topic;
+    bar.classList.add('active');
+    tag.textContent = topic;
+
+    if (hero) {
+      var ht = (hero.getAttribute('data-topics') || '').split(',');
+      hero.classList.toggle('filtered-out', ht.indexOf(topic) === -1);
+    }
+    cards.forEach(function(c) {
+      var ct = (c.getAttribute('data-topics') || '').split(',');
+      c.classList.toggle('filtered-out', ct.indexOf(topic) === -1);
+    });
+    var older = document.getElementById('olderArticles');
+    if (older) { older.classList.add('visible'); }
+    var btn = document.getElementById('olderToggle');
+    if (btn) { btn.classList.add('expanded'); }
+    var lbl = document.getElementById('olderLabel');
+    if (lbl) { lbl.textContent = 'Hide older articles'; }
+    var cnt = document.getElementById('olderCount');
+    if (cnt) { cnt.style.display = 'none'; }
+  }
+
+  function clearFilter() {
+    active = null;
+    bar.classList.remove('active');
+    if (hero) hero.classList.remove('filtered-out');
+    cards.forEach(function(c) { c.classList.remove('filtered-out'); });
+  }
+
+  document.addEventListener('click', function(e) {
+    var el = e.target.closest('[data-filter-topic]');
+    if (el) {
+      e.preventDefault();
+      var topic = el.getAttribute('data-filter-topic');
+      if (active === topic) { clearFilter(); } else { applyFilter(topic); }
+    }
+  });
+
+  document.getElementById('filterClear').addEventListener('click', clearFilter);
+})();
+
+function toggleOlder() {
+  var section = document.getElementById('olderArticles');
+  var btn = document.getElementById('olderToggle');
+  var label = document.getElementById('olderLabel');
+  var count = document.getElementById('olderCount');
+  var isVisible = section.classList.contains('visible');
+  section.classList.toggle('visible');
+  btn.classList.toggle('expanded');
+  if (isVisible) {
+    label.textContent = 'Show older articles';
+    count.style.display = '';
+  } else {
+    label.textContent = 'Hide older articles';
+    count.style.display = 'none';
+  }
+}
+</script>
+
+<main class="main-container">
+  <section class="article-feed">
+    <div class="feed-header">
+      <span class="feed-count"><strong>5 new articles</strong> this week</span>
+      <span class="feed-count">Newest first</span>
+    </div>
+    <div class="article-list">
+    <article class="article-card" data-topics="Corporate Banking,Technology,Customer Experience">
+      <div class="card-title-row">
+        <h3><a href="articles/fis-launches-embedded-banking-platform-for-us-banks-fintech-schweiz-digital-fina.html">FIS Launches Embedded Banking Platform for US Banks - Fintech Schweiz Digital Finance News - FintechNewsCH</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="Corporate Banking">Corporate Banking</a>
+<a href="#" class="tag" data-filter-topic="Technology">Technology</a>
+<a href="#" class="tag" data-filter-topic="Customer Experience">Customer Experience</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">FintechNews CH</span><span class="dot"></span>04 Sep 2026<span class="dot"></span>1 min read</div>
+      <p class="card-summary">FIS is launching an embedded banking platform that allows US banks to integrate accounts, card issuing, and payments directly into business software used by corporate clients, keeping the customer relationship and...</p>
+      <div class="card-footer">
+        <a href="articles/fis-launches-embedded-banking-platform-for-us-banks-fintech-schweiz-digital-fina.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="Corporate Banking">
+      <div class="card-title-row">
+        <h3><a href="articles/ecb-explores-link-between-tips-and-brazils-pix.html">ECB explores link between Tips and Brazil&#x27;s Pix</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="Corporate Banking">Corporate Banking</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">Finextra</span><span class="dot"></span>04 Sep 2026<span class="dot"></span>1 min read</div>
+      <p class="card-summary">The ECB is in preliminary discussions with Brazil&#x27;s central bank to interlink TIPS with Brazil&#x27;s Pix real-time payment system, with a potential pilot by 2028. This follows similar ECB efforts to connect TIPS with...</p>
+      <div class="card-footer">
+        <a href="articles/ecb-explores-link-between-tips-and-brazils-pix.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="Corporate Banking,Technology">
+      <div class="card-title-row">
+        <h3><a href="articles/why-the-us-is-snubbing-cbdcs.html">Why the US Is Snubbing CBDCs</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="Corporate Banking">Corporate Banking</a>
+<a href="#" class="tag" data-filter-topic="Technology">Technology</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">Global Finance</span><span class="dot"></span>04 Sep 2026<span class="dot"></span>7 min read</div>
+      <p class="card-summary">The US is diverging from global consensus by backing stablecoins over CBDCs, while the EU advances toward a digital euro by 2029 and China&#x27;s e-yuan has already processed $2.3 trillion in transactions. This creates a...</p>
+      <div class="card-footer">
+        <a href="articles/why-the-us-is-snubbing-cbdcs.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="Retail Banking,Change Management">
+      <div class="card-title-row">
+        <h3><a href="articles/revolut-nabs-conditional-occ-charter.html">Revolut nabs conditional OCC charter</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="Retail Banking">Retail Banking</a>
+<a href="#" class="tag" data-filter-topic="Change Management">Change Management</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">Banking Dive</span><span class="dot"></span>04 Sep 2026<span class="dot"></span>2 min read</div>
+      <p class="card-summary">Revolut has received conditional OCC approval to launch a full-service national bank in the US, targeting a 2027 launch with at least $95M in initial capital and a 10% tier 1 leverage ratio requirement. This follows a...</p>
+      <div class="card-footer">
+        <a href="articles/revolut-nabs-conditional-occ-charter.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="Corporate Banking,Retail Banking,Customer Experience">
+      <div class="card-title-row">
+        <h3><a href="articles/interview-with-mr-thorsten-seeger-member-of-the-management-board-sme-bank.html">Interview with Mr. Thorsten Seeger, Member of the Management Board, SME Bank</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="Corporate Banking">Corporate Banking</a>
+<a href="#" class="tag" data-filter-topic="Retail Banking">Retail Banking</a>
+<a href="#" class="tag" data-filter-topic="Customer Experience">Customer Experience</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">International Banker</span><span class="dot"></span>03 Sep 2026<span class="dot"></span>10 min read</div>
+      <p class="card-summary">Thorsten Seeger of Lithuania&#x27;s SME Bank outlines how the bank operates as a high-speed digital distribution engine bridging the EU&#x27;s €39B annual SME financing gap, emphasizing that the real bottleneck is not capital...</p>
+      <div class="card-footer">
+        <a href="articles/interview-with-mr-thorsten-seeger-member-of-the-management-board-sme-bank.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    </div>
+
+    <div class="older-divider">
+      <button class="older-toggle" id="olderToggle" onclick="toggleOlder()">
+        <span id="olderLabel">Show older articles</span>
+        <span class="older-count" id="olderCount">(24 more)</span>
+        <span class="arrow-icon">&#9660;</span>
+      </button>
+    </div>
+    <div class="older-articles" id="olderArticles">
+    <article class="article-card" data-topics="Change Management,Processes,AI">
+      <div class="card-title-row">
+        <h3><a href="articles/return-to-basics-why-execution-matters-more-than-strategy.html">Return to Basics: Why Execution Matters More Than Strategy</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="Change Management">Change Management</a>
+<a href="#" class="tag" data-filter-topic="Processes">Processes</a>
+<a href="#" class="tag" data-filter-topic="AI">AI</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">International Banker</span><span class="dot"></span>02 Sep 2026<span class="dot"></span>7 min read</div>
+      <p class="card-summary">Alvarez &amp; Marsal&#x27;s Asad Ahmed argues that banks&#x27; core competitive problem is not strategy formulation but execution discipline — institutions repeatedly move to the next transformation wave before embedding the previous...</p>
+      <div class="card-footer">
+        <a href="articles/return-to-basics-why-execution-matters-more-than-strategy.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="Processes,AI,Technology">
+      <div class="card-title-row">
+        <h3><a href="articles/when-fraud-moves-at-machine-speed-your-defense-can-t-move-at-human-speed.html">When fraud moves at machine speed, your defense can’t move at human speed</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="Processes">Processes</a>
+<a href="#" class="tag" data-filter-topic="AI">AI</a>
+<a href="#" class="tag" data-filter-topic="Technology">Technology</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">Capgemini</span><span class="dot"></span>02 Sep 2026<span class="dot"></span>4 min read</div>
+      <p class="card-summary">Fraud operations face a structural operating model crisis: attackers have automated at machine speed while investigation teams still rely on manual queues, spreadsheets, and hand-typed narratives. The article argues the...</p>
+      <div class="card-footer">
+        <a href="articles/when-fraud-moves-at-machine-speed-your-defense-can-t-move-at-human-speed.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="AI,Change Management,Processes">
+      <div class="card-title-row">
+        <h3><a href="articles/ai-transformation-the-fears-are-new-the-answer-isnt.html">AI Transformation: The Fears Are New. The Answer Isn&#x27;t.</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="AI">AI</a>
+<a href="#" class="tag" data-filter-topic="Change Management">Change Management</a>
+<a href="#" class="tag" data-filter-topic="Processes">Processes</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">Bain</span><span class="dot"></span>01 Sep 2026<span class="dot"></span>10 min read</div>
+      <p class="card-summary">Bain argues that the primary bottleneck in AI transformation is human, not technological — only 1 in 5 CEOs report realizing most of their targeted AI results, with resistance, skill gaps, and pilot-to-scale failures as...</p>
+      <div class="card-footer">
+        <a href="articles/ai-transformation-the-fears-are-new-the-answer-isnt.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="Corporate Banking,Customer Experience,Retail Banking">
+      <div class="card-title-row">
+        <h3><a href="articles/how-the-caribbeans-best-bank-for-smes-built-an-ecosystem-euromoney.html">How the Caribbean&#x27;s best bank for SMEs built an ecosystem - Euromoney</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="Corporate Banking">Corporate Banking</a>
+<a href="#" class="tag" data-filter-topic="Customer Experience">Customer Experience</a>
+<a href="#" class="tag" data-filter-topic="Retail Banking">Retail Banking</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">Euromoney</span><span class="dot"></span>01 Sep 2026<span class="dot"></span>3 min read</div>
+      <p class="card-summary">Banreservas built a decade-long SME ecosystem platform (Fomenta Pymes) combining credit, insurance, digital tools, financial education, and legal support — serving 157,000 SMEs and disbursing $4.7B. The model reframes...</p>
+      <div class="card-footer">
+        <a href="articles/how-the-caribbeans-best-bank-for-smes-built-an-ecosystem-euromoney.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="AI,Processes,Change Management">
+      <div class="card-title-row">
+        <h3><a href="articles/agentic-ai-transforming-compliance-at-financial-institutions.html">Agentic AI Transforming Compliance at Financial Institutions</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="AI">AI</a>
+<a href="#" class="tag" data-filter-topic="Processes">Processes</a>
+<a href="#" class="tag" data-filter-topic="Change Management">Change Management</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">Oliver Wyman</span><span class="dot"></span>31 Aug 2026<span class="dot"></span>1 min read</div>
+      <p class="card-summary">Oliver Wyman&#x27;s report outlines how agentic AI can transform compliance functions at financial institutions, shifting teams from reactive task execution to strategic advisory roles. Key findings include potential...</p>
+      <div class="card-footer">
+        <a href="articles/agentic-ai-transforming-compliance-at-financial-institutions.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="Corporate Banking,Technology,AI">
+      <div class="card-title-row">
+        <h3><a href="articles/digital-assets-reshaping-the-future-of-wholesale-banking.html">Digital assets reshaping the future of wholesale banking</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="Corporate Banking">Corporate Banking</a>
+<a href="#" class="tag" data-filter-topic="Technology">Technology</a>
+<a href="#" class="tag" data-filter-topic="AI">AI</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">Oliver Wyman</span><span class="dot"></span>31 Aug 2026<span class="dot"></span>3 min read</div>
+      <p class="card-summary">Oliver Wyman&#x27;s 2026 wholesale banking outlook (with Morgan Stanley) projects industry revenues of $650B–$850B by 2030 across macro scenarios, with digital assets identified as a key structural force. The report frames...</p>
+      <div class="card-footer">
+        <a href="articles/digital-assets-reshaping-the-future-of-wholesale-banking.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="Corporate Banking,AI,Technology">
+      <div class="card-title-row">
+        <h3><a href="articles/how-to-win-in-financial-market-infrastructure-through-2030.html">How to win in financial market infrastructure through 2030</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="Corporate Banking">Corporate Banking</a>
+<a href="#" class="tag" data-filter-topic="AI">AI</a>
+<a href="#" class="tag" data-filter-topic="Technology">Technology</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">Oliver Wyman</span><span class="dot"></span>31 Aug 2026<span class="dot"></span>7 min read</div>
+      <p class="card-summary">Oliver Wyman&#x27;s 2026 FMI report analyzes strategic positioning for financial market infrastructure players through 2030, identifying enterprise AI and tokenization as the two forces separating winners from laggards. The...</p>
+      <div class="card-footer">
+        <a href="articles/how-to-win-in-financial-market-infrastructure-through-2030.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="AI,Processes,Change Management">
+      <div class="card-title-row">
+        <h3><a href="articles/managing-ai-transformation-risk-in-erp.html">Managing AI transformation risk in ERP</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="AI">AI</a>
+<a href="#" class="tag" data-filter-topic="Processes">Processes</a>
+<a href="#" class="tag" data-filter-topic="Change Management">Change Management</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">PwC</span><span class="dot"></span>25 Aug 2026<span class="dot"></span>4 min read</div>
+      <p class="card-summary">PwC outlines the governance and control risks that emerge when AI is embedded into ERP and core finance workflows, arguing that traditional deterministic controls are inadequate for probabilistic, agentic AI systems....</p>
+      <div class="card-footer">
+        <a href="articles/managing-ai-transformation-risk-in-erp.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="AI,Change Management,Customer Experience">
+      <div class="card-title-row">
+        <h3><a href="articles/financial-services-future-in-ai-age-known-unknown-debates.html">Financial Services&#x27; Future In AI Age: Known Unknown Debates</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="AI">AI</a>
+<a href="#" class="tag" data-filter-topic="Change Management">Change Management</a>
+<a href="#" class="tag" data-filter-topic="Customer Experience">Customer Experience</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">Oliver Wyman</span><span class="dot"></span>21 Aug 2026<span class="dot"></span>1 min read</div>
+      <p class="card-summary">Oliver Wyman&#x27;s report frames AI transformation in financial services as a strategic leadership challenge, not a technology problem. It identifies five critical debates shaping the industry: AI running bank operations,...</p>
+      <div class="card-footer">
+        <a href="articles/financial-services-future-in-ai-age-known-unknown-debates.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="Technology,Processes,Customer Experience">
+      <div class="card-title-row">
+        <h3><a href="articles/flagstar-picks-cloud-native-core-to-replace-legacy-patchwork.html">Flagstar picks cloud-native core to replace legacy patchwork</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="Technology">Technology</a>
+<a href="#" class="tag" data-filter-topic="Processes">Processes</a>
+<a href="#" class="tag" data-filter-topic="Customer Experience">Customer Experience</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">Banking Dive</span><span class="dot"></span>21 Aug 2026<span class="dot"></span>3 min read</div>
+      <p class="card-summary">Flagstar Bank is replacing its legacy patchwork of two core systems with Fiserv&#x27;s Finxact cloud-native platform following a rigorous 12-candidate evaluation process, with migrations planned for 2027-2028. The...</p>
+      <div class="card-footer">
+        <a href="articles/flagstar-picks-cloud-native-core-to-replace-legacy-patchwork.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="AI,Processes,Change Management">
+      <div class="card-title-row">
+        <h3><a href="articles/systems-thinking-the-route-to-scalable-ai.html">Systems thinking: The route to scalable AI</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="AI">AI</a>
+<a href="#" class="tag" data-filter-topic="Processes">Processes</a>
+<a href="#" class="tag" data-filter-topic="Change Management">Change Management</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">Capgemini</span><span class="dot"></span>17 Aug 2026<span class="dot"></span>8 min read</div>
+      <p class="card-summary">This Capgemini article argues that scaling AI requires shifting from component engineering to systems engineering — understanding AI not as discrete tools but as interconnected, emergent networks of agents, humans,...</p>
+      <div class="card-footer">
+        <a href="articles/systems-thinking-the-route-to-scalable-ai.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="Retail Banking,Change Management,Customer Experience">
+      <div class="card-title-row">
+        <h3><a href="articles/american-banks-left-the-door-open-european-fintechs-are-walking-in.html">American Banks Left the Door Open. European Fintechs Are Walking In.</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="Retail Banking">Retail Banking</a>
+<a href="#" class="tag" data-filter-topic="Change Management">Change Management</a>
+<a href="#" class="tag" data-filter-topic="Customer Experience">Customer Experience</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">Global Finance</span><span class="dot"></span>10 Aug 2026<span class="dot"></span>4 min read</div>
+      <p class="card-summary">This article argues that European fintechs like Revolut are better positioned than U.S. incumbents to compete globally because they&#x27;ve been forged in the regulatory and cultural complexity of fragmented European...</p>
+      <div class="card-footer">
+        <a href="articles/american-banks-left-the-door-open-european-fintechs-are-walking-in.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="AI,Customer Experience,Change Management">
+      <div class="card-title-row">
+        <h3><a href="articles/from-share-of-wallet-to-share-of-trust-euromoney.html">From share of wallet to share of trust - Euromoney</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="AI">AI</a>
+<a href="#" class="tag" data-filter-topic="Customer Experience">Customer Experience</a>
+<a href="#" class="tag" data-filter-topic="Change Management">Change Management</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">Euromoney</span><span class="dot"></span>31 Jul 2026<span class="dot"></span>5 min read</div>
+      <p class="card-summary">Santander Portugal has built a three-pillar CX architecture — digital intelligence, human proximity, and continuous engagement — that connects AI deployment directly to financial performance, achieving 31.8% RoTE and...</p>
+      <div class="card-footer">
+        <a href="articles/from-share-of-wallet-to-share-of-trust-euromoney.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="AI,Change Management,Processes">
+      <div class="card-title-row">
+        <h3><a href="articles/board-oversight-of-ai-transformation.html">Board oversight of AI transformation</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="AI">AI</a>
+<a href="#" class="tag" data-filter-topic="Change Management">Change Management</a>
+<a href="#" class="tag" data-filter-topic="Processes">Processes</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">PwC</span><span class="dot"></span>31 Jul 2026<span class="dot"></span>2 min read</div>
+      <p class="card-summary">PwC frames AI not as a technology initiative but as an enterprise transformation requiring board-level governance across strategy, capital, talent, and risk. The piece outlines a governance model where boards must...</p>
+      <div class="card-footer">
+        <a href="articles/board-oversight-of-ai-transformation.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="AI,Customer Experience,Processes">
+      <div class="card-title-row">
+        <h3><a href="articles/agentic-front-office-redesigning-commercial-operations-with-ai.html">Agentic front office: Redesigning commercial operations with AI</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="AI">AI</a>
+<a href="#" class="tag" data-filter-topic="Customer Experience">Customer Experience</a>
+<a href="#" class="tag" data-filter-topic="Processes">Processes</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">PwC</span><span class="dot"></span>29 Jul 2026<span class="dot"></span>4 min read</div>
+      <p class="card-summary">PwC outlines a framework for redesigning commercial front-office operations around AI agents, breaking down silos between marketing, sales, pricing, and customer service into a unified, data-driven system. The model...</p>
+      <div class="card-footer">
+        <a href="articles/agentic-front-office-redesigning-commercial-operations-with-ai.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="AI,Processes,Change Management">
+      <div class="card-title-row">
+        <h3><a href="articles/agentic-ai-governance-risk-and-controls-for-business-leaders.html">Agentic AI Governance, Risk, and Controls for Business Leaders</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="AI">AI</a>
+<a href="#" class="tag" data-filter-topic="Processes">Processes</a>
+<a href="#" class="tag" data-filter-topic="Change Management">Change Management</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">Bain</span><span class="dot"></span>28 Jul 2026<span class="dot"></span>8 min read</div>
+      <p class="card-summary">Bain outlines why traditional AI governance frameworks—intake assessments, review boards, policy documents—are fundamentally insufficient for agentic AI systems that act autonomously at scale. Unlike generative AI...</p>
+      <div class="card-footer">
+        <a href="articles/agentic-ai-governance-risk-and-controls-for-business-leaders.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="Technology,AI,Change Management">
+      <div class="card-title-row">
+        <h3><a href="articles/engineering-for-an-ai-enabled-bank-with-a-heart-euromoney.html">Engineering for an AI-enabled bank with a heart - Euromoney</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="Technology">Technology</a>
+<a href="#" class="tag" data-filter-topic="AI">AI</a>
+<a href="#" class="tag" data-filter-topic="Change Management">Change Management</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">Euromoney</span><span class="dot"></span>27 Jul 2026<span class="dot"></span>3 min read</div>
+      <p class="card-summary">DBS Bank outlines its strategic framework for becoming an &#x27;AI-enabled bank with a heart,&#x27; anchored on a proprietary R.I.S.E. framework (Resilience, Innovation, Security, Efficiency) that embeds trust as an engineering...</p>
+      <div class="card-footer">
+        <a href="articles/engineering-for-an-ai-enabled-bank-with-a-heart-euromoney.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="Processes,Change Management,Corporate Banking">
+      <div class="card-title-row">
+        <h3><a href="articles/managing-transformation-risk-in-divestitures.html">Managing transformation risk in divestitures</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="Processes">Processes</a>
+<a href="#" class="tag" data-filter-topic="Change Management">Change Management</a>
+<a href="#" class="tag" data-filter-topic="Corporate Banking">Corporate Banking</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">PwC</span><span class="dot"></span>24 Jul 2026<span class="dot"></span>4 min read</div>
+      <p class="card-summary">PwC outlines a structured framework for managing transformation risk during divestitures, focusing on four risk concentration areas: regulatory reporting, data/technology/TSAs, program governance, and operating model....</p>
+      <div class="card-footer">
+        <a href="articles/managing-transformation-risk-in-divestitures.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="Change Management,AI,Processes">
+      <div class="card-title-row">
+        <h3><a href="articles/2026-global-human-capital-trends.html">2026 Global Human Capital Trends</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="Change Management">Change Management</a>
+<a href="#" class="tag" data-filter-topic="AI">AI</a>
+<a href="#" class="tag" data-filter-topic="Processes">Processes</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">Deloitte</span><span class="dot"></span>5 min read</div>
+      <p class="card-summary">Deloitte&#x27;s 2026 Global Human Capital Trends report argues that competitive advantage is shifting from technology differentiation to human capability, with 7 in 10 leaders prioritizing agility as their primary strategy....</p>
+      <div class="card-footer">
+        <a href="articles/2026-global-human-capital-trends.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="AI,Technology,Change Management">
+      <div class="card-title-row">
+        <h3><a href="articles/2026-hype-cycle-for-agentic-ai-gartner.html">2026 Hype Cycle for Agentic AI | Gartner</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="AI">AI</a>
+<a href="#" class="tag" data-filter-topic="Technology">Technology</a>
+<a href="#" class="tag" data-filter-topic="Change Management">Change Management</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">Gartner</span><span class="dot"></span>3 min read</div>
+      <p class="card-summary">Gartner&#x27;s 2026 Hype Cycle for Agentic AI maps the maturity of AI agent technologies, revealing that while 60%+ of organizations plan deployment within two years, only 17% have done so — exposing a significant...</p>
+      <div class="card-footer">
+        <a href="articles/2026-hype-cycle-for-agentic-ai-gartner.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="AI,Processes,Technology">
+      <div class="card-title-row">
+        <h3><a href="articles/for-ai-value-focus-on-your-use-cases.html">For AI Value, Focus on Your Use Cases</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="AI">AI</a>
+<a href="#" class="tag" data-filter-topic="Processes">Processes</a>
+<a href="#" class="tag" data-filter-topic="Technology">Technology</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">Gartner</span><span class="dot"></span>4 min read</div>
+      <p class="card-summary">Gartner outlines a three-pillar risk framework for scaling AI beyond pilots: cost discipline, cybersecurity hardening, and trustworthiness/governance. Only 23% of CxOs report confidence in GenAI outputs, and just one in...</p>
+      <div class="card-footer">
+        <a href="articles/for-ai-value-focus-on-your-use-cases.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="AI,Change Management,Technology">
+      <div class="card-title-row">
+        <h3><a href="articles/how-enterprises-can-advance-ai-native-business-models.html">How Enterprises Can Advance AI-Native Business Models</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="AI">AI</a>
+<a href="#" class="tag" data-filter-topic="Change Management">Change Management</a>
+<a href="#" class="tag" data-filter-topic="Technology">Technology</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">Gartner</span><span class="dot"></span>3 min read</div>
+      <p class="card-summary">Gartner introduces an AI-native business model framework with a 5-stage maturity scorecard, positioning AI not as an enhancement tool but as the foundational layer of how businesses create and deliver value. The...</p>
+      <div class="card-footer">
+        <a href="articles/how-enterprises-can-advance-ai-native-business-models.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="Change Management,AI">
+      <div class="card-title-row">
+        <h3><a href="articles/artificial-intelligence-and-the-future-of-entry-level-work-a-framework-for-safeg.html">Artificial Intelligence and the Future of Entry-Level Work: A Framework for Safeguarding and Reinventing Early Career Pathways</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="Change Management">Change Management</a>
+<a href="#" class="tag" data-filter-topic="AI">AI</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">World Economic Forum</span><span class="dot"></span>1 min read</div>
+      <p class="card-summary">A WEF/PwC report examines how AI is disrupting entry-level roles globally, with over one-third of young workers in jobs facing medium-to-high AI exposure. It introduces a four-dimension framework covering job access,...</p>
+      <div class="card-footer">
+        <a href="articles/artificial-intelligence-and-the-future-of-entry-level-work-a-framework-for-safeg.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="AI,Technology,Customer Experience">
+      <div class="card-title-row">
+        <h3><a href="articles/fsi-predictions-2026.html">FSI Predictions 2026</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="AI">AI</a>
+<a href="#" class="tag" data-filter-topic="Technology">Technology</a>
+<a href="#" class="tag" data-filter-topic="Customer Experience">Customer Experience</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">Deloitte</span><span class="dot"></span>4 min read</div>
+      <p class="card-summary">Deloitte&#x27;s FSI Predictions 2026 outlines major structural shifts in US financial services, covering agentic AI in wealth management, private capital democratization, stablecoin payment rails, and core banking...</p>
+      <div class="card-footer">
+        <a href="articles/fsi-predictions-2026.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    </div>
+  </section>
+
+  <aside class="sidebar">
+    <div class="sidebar-card">
+      <div class="card-header">
+        <span>&#8593;</span> Trending Topics
+      </div>
+      <div class="card-body">
+                <div class="trending-item">
+          <span class="trending-rank">1</span>
+          <div>
+            <div class="trending-text">AI</div>
+            <div class="trending-count">21 articles</div>
+          </div>
+        </div>        <div class="trending-item">
+          <span class="trending-rank">2</span>
+          <div>
+            <div class="trending-text">Change Management</div>
+            <div class="trending-count">17 articles</div>
+          </div>
+        </div>        <div class="trending-item">
+          <span class="trending-rank">3</span>
+          <div>
+            <div class="trending-text">Processes</div>
+            <div class="trending-count">14 articles</div>
+          </div>
+        </div>        <div class="trending-item">
+          <span class="trending-rank">4</span>
+          <div>
+            <div class="trending-text">Technology</div>
+            <div class="trending-count">12 articles</div>
+          </div>
+        </div>        <div class="trending-item">
+          <span class="trending-rank">5</span>
+          <div>
+            <div class="trending-text">Customer Experience</div>
+            <div class="trending-count">9 articles</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">National Bank of Greece &mdash; Corporate Transformation Division</div>
+    <div class="footer-right">
+      <span>Powered by AI-assisted curation</span>
+      <span class="footer-dot"></span>
+      <span>Internal use only</span>
+    </div>
+  </div>
+</footer>
+<script>
+function toggleTheme() {
+  var html = document.documentElement;
+  var next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+}
+(function(){
+  var d = document.getElementById('current-date');
+  if (d) {
+    var now = new Date();
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    d.textContent = String(now.getDate()).padStart(2,'0') + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t)})()</script>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transformation Digest | NBG</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="accent-line"></div>
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-left">
+      <div class="header-logo">NBG</div>
+      <div class="header-text">
+        <h1><a href="../index.html">Transformation Digest</a></h1>
+        <div class="subtitle">Corporate Transformation Division | National Bank of Greece</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="header-meta">
+        <div class="update-badge" id="current-date">07 Sep 2026</div>
+        <div>Last updated: 07 Sep 2026</div>
+      </div>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <span class="icon-sun">&#9788;</span>
+        <span class="icon-moon">&#9790;</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="detail-container">
+  <a href="../index.html" class="detail-back"><span>&larr;</span> Back to Digest</a>
+
+  <h1 class="detail-title">Managing AI transformation risk in ERP</h1>
+
+  <div class="detail-meta">
+    <span class="source-name">PwC</span>
+    <span class="sep"></span>
+    <span>25 Aug 2026</span>
+    <span class="sep"></span>
+    <span>4 min read</span>
+  </div>
+
+  <div class="detail-topics">
+    <span class="tag">AI</span>
+<span class="tag">Processes</span>
+<span class="tag">Change Management</span>
+  </div>
+
+  <div class="detail-insight">
+    <div class="insight-label">Key Insight</div>
+    <p>As AI shifts from &#x27;assistive&#x27; to &#x27;relied upon&#x27; in core workflows, banks must redesign their control frameworks from the ground up — traditional deterministic ICFR controls break down under probabilistic AI outputs, making explicit accountability ownership and built-in auditability non-negotiable from the start of any transformation.</p>
+  </div>
+
+  <div class="detail-section-label">Full Article</div><div class="detail-article-body"><p class="drop-cap">ERP transformations have entered a new phase. AI is already being embedded directly into core finance and operational workflows, and vendors are moving quickly to roll out new capabilities. At the same time, many organizations are deploying AI platforms alongside ERP-native features, often using the same underlying ERP data.</p>
+<p>That combination can unlock real value: faster insights, better forecasting, automation, anomaly detection, decision support. It also creates a more complex, more fragmented risk and control environment. If you want to capture that value, treat AI as a decision-making capability—not a &quot;feature.&quot; Unify governance across your ERP and non‑ERP AI and redesign controls for probabilistic outputs and agentic workflows. And, crucially, build auditability into your processes from Day One.</p>
+<p>AI can show up in financial reporting in familiar ways, like producing information used in reporting, operating a control, or operating part of a process. What&#x27;s new is its scale and speed.</p>
+<p>Through discussions with clients and leveraging PwC&#x27;s proprietary transformation risks insight framework, we&#x27;ve identified some of the most common risks you can encounter with AI in your ERP transformations.</p>
+<p>When AI influences decisions embedded in ERP workflows, organizations often struggle to define who owns the model, the data, the decision, and the outcome, particularly as usage moves from &quot;assistive&quot; to &quot;relied upon.&quot; If you don&#x27;t explicitly define reviewer accountability, monitoring expectations, and ownership in financially relevant workflows, you risk confusion, bottlenecks, and stalled transformations.</p>
+<p>Example: During an ERP transformation, a global manufacturing company implements AI-driven invoice matching. As the company starts relying on the AI&#x27;s recommendations for payment approvals, confusion arises over who&#x27;s responsible for reviewing exceptions. The finance team? IT? The AI vendor? Without clear accountability, disputed invoices can pile up, delaying payments and damaging supplier relationships.</p>
+<p>Traditional ERP controls, like internal control over financial reporting (ICFR), were built for deterministic systems—easily observable and tested by the ERP user, infrequently changed, and easily audited. AI introduces probabilistic behavior, rapid change, greater reliance on vendor platforms, and more complex, obfuscated audit trails. This can shift control reliance toward management review and monitoring, often without the precision needed to remain effective as scale increases.</p>
+<p>Likewise, leaders need to explain AI-supported decisions to auditors, regulators, and boards, and they need to retain defensible evidence trails—how and why your AI collects data and makes its recommendations. These systems use signals such as logs, traces, model outputs, and data flows, which you can&#x27;t translate into metrics and alerts without transparency.</p>
+<p>Example: A global manufacturer deploys an AI service that recommends revenue recognition, accrual, and reserve adjustments across multiple ERP instances using data from operational systems and a third-party foundation model. As the underlying model and prompts evolve through vendor updates and internal tuning, management reviewers increasingly rely on summarized AI outputs rather than validating the underlying assumptions. During a regulatory inquiry, the company struggles to reconstruct which model version, data sources, approval workflow, and governance controls supported specific financial decisions. This can lead to findings around insufficient control precision, ineffective monitoring, and inadequate evidence to demonstrate compliance with financial reporting and regulatory requirements.</p>
+<p>AI can amplify issues in data quality, lineage, and completeness or accuracy. In order to trust your AI&#x27;s outputs, your teams need to understand how AI affects underlying data and how management should demonstrate these qualities.</p>
+<p>Example: In a source-to-pay process, an external AI platform accesses ERP data and other systems to automate purchase order approvals. When a data quality issue in the legacy system leads to incorrect approvals, the root cause becomes hard to trace. The organization realizes it needed to map data lineage across all systems and demonstrate data completeness and accuracy, not just within the ERP.</p>
+<p>AI capabilities also spread across ERP-native features, third-party AI platforms, and open-source or custom agent frameworks, each with a different owner, logging approach, and control pattern. Internal &quot;technology patterns&quot; materials explicitly show multiple paths (ERP-integrated, third-party platforms, open source) and call out the need for shared building blocks like traceability, logging, and integrated monitoring or observability across silos.</p>
+<p>This fragmentation increases risk through misaligned data sources feeding different AI logic and outcomes; inconsistent governance and documentation across platforms, which make end-to-end oversight difficult; and a fractured audit narrative when decisions span systems but evidence is scattered or incomplete.</p>
+<p>Example: A company uses both ERP-native AI features and a third-party AI platform for forecasting. Each system has its own logging and monitoring tools, and there&#x27;s no unified view of AI decisions. When a forecasting error occurs, it&#x27;s unclear which system&#x27;s logic is responsible, and the evidence is scattered across platforms. This fragmentation makes it difficult to reconstruct an audit narrative and delays remediation.</p>
+<p>With the emphasis now on speed and scale, you&#x27;re going to want to move fast. At the same time, you need to think strategically and connect your data and systems with AI in a single, holistic framework that takes advantage of both. Here are a few tactical moves you can make right now as you implement AI across your organization.</p>
+<p>AI enablement often happens outside ERP, through broader AI ecosystems, using ERP data. Taking a portfolio-wide approach can help you align transformation efforts, reduce risk, and drive meaningful outcomes across business, tech, and controls. Your teams should understand the full AI footprint, not just the parts inside their ERP suites. One approach is to inventory where AI influences outcomes across your major finance value streams (record‑to‑report, source‑to‑pay, and lead‑to‑cash), regardless of platform.</p>
+<p>When tooling is decentralized, governance can&#x27;t depend solely on centralized registration. One internal governance model proposes keeping enterprise Trust AI as the backbone with a targeted &quot;overlay&quot; that activates when AI intersects with financial reporting workflows or systems within the ICFR boundary.</p>
+<p>AI can affect business process controls, IT general controls (ITGCs) and SDLC controls, reliance on third-party tools and services, and even expose issues with your underlying data completeness and accuracy. You should design controls end-to-end around these areas.</p>
+<p>As autonomy increases, monitoring becomes more important. It needs to be strategically designed and easily auditable. Proactively communicate with your auditors about where AI may impact your reporting and controls—it can have major impacts for your risks and audit plans. Detailed data trails and observability can help offset common &quot;black box&quot; problems with auditing your AI&#x27;s reasoning. Addressing these types of governance, risks, and controls early can help you avoid downstream disruption.</p></div>
+
+  
+
+  <div class="detail-actions">
+    <a href="https://www.pwc.com/us/en/services/audit-assurance/library/ai-transformation-risk-erp.html" target="_blank" rel="noopener noreferrer" class="detail-cta">
+      Read Original Source <span class="arrow">&rarr;</span>
+    </a>
+    
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">National Bank of Greece &mdash; Corporate Transformation Division</div>
+    <div class="footer-right">
+      <span>Powered by AI-assisted curation</span>
+      <span class="footer-dot"></span>
+      <span>Internal use only</span>
+    </div>
+  </div>
+</footer>
+<script>
+function toggleTheme() {
+  var html = document.documentElement;
+  var next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+}
+(function(){
+  var d = document.getElementById('current-date');
+  if (d) {
+    var now = new Date();
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    d.textContent = String(now.getDate()).padStart(2,'0') + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
+  }
+})();
+</script>
+</body>
+</html>

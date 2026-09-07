@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t)})()</script>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transformation Digest | NBG</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="accent-line"></div>
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-left">
+      <div class="header-logo">NBG</div>
+      <div class="header-text">
+        <h1><a href="../index.html">Transformation Digest</a></h1>
+        <div class="subtitle">Corporate Transformation Division | National Bank of Greece</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="header-meta">
+        <div class="update-badge" id="current-date">07 Sep 2026</div>
+        <div>Last updated: 07 Sep 2026</div>
+      </div>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <span class="icon-sun">&#9788;</span>
+        <span class="icon-moon">&#9790;</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="detail-container">
+  <a href="../index.html" class="detail-back"><span>&larr;</span> Back to Digest</a>
+
+  <h1 class="detail-title">Artificial Intelligence and the Future of Entry-Level Work: A Framework for Safeguarding and Reinventing Early Career Pathways</h1>
+
+  <div class="detail-meta">
+    <span class="source-name">World Economic Forum</span>
+    <span class="sep"></span>
+    <span>1 min read</span>
+  </div>
+
+  <div class="detail-topics">
+    <span class="tag">Change Management</span>
+<span class="tag">AI</span>
+  </div>
+
+  <div class="detail-insight">
+    <div class="insight-label">Key Insight</div>
+    <p>Banking transformation leaders should proactively redesign entry-level roles around AI augmentation rather than elimination — using structured frameworks across job design and talent pipelines — to avoid hollowing out the talent base that feeds future senior capability.</p>
+  </div>
+
+  <div class="detail-section-label">Full Article</div><div class="detail-article-body"><p class="drop-cap">Artificial intelligence (AI) is reshaping how organizations hire, develop and advance talent, and this is most visible at entry-level. Globally, more than one in three young workers are employed in occupations with medium to high exposure to AI-driven task change. How these roles evolve will have significant implications for organizational performance, workforce participation and economic mobility.</p>
+<p>This report, developed in collaboration with PwC and informed by insights from global stakeholders and workforce leaders across industries, examines the impact of AI on entry-level work and identifies priorities for safeguarding and reinventing early-career pathways. It introduces a framework centered on four dimensions - job access, job design, talent pipelines and education system alignment - to help organizations, educators, workers and policy-makers identify where strain is emerging and where deliberate action is needed.</p></div>
+
+  
+
+  <div class="detail-actions">
+    <a href="https://www.weforum.org/publications/artificial-intelligence-and-the-future-of-entry-level-work-a-framework-for-safeguarding-and-reinventing-early-career-pathways/" target="_blank" rel="noopener noreferrer" class="detail-cta">
+      Read Original Source <span class="arrow">&rarr;</span>
+    </a>
+    <a href="https://reports.weforum.org/docs/WEF_Artificial_Intelligence_and_the_Future_of_Entry_Level_Work_2026.pdf" target="_blank" rel="noopener noreferrer" class="detail-cta detail-cta-pdf"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="vertical-align:-2px;margin-right:6px"><path d="M8 10V2m0 8L5 7m3 3l3-3M3 14h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Download Full Report (PDF)</a>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">National Bank of Greece &mdash; Corporate Transformation Division</div>
+    <div class="footer-right">
+      <span>Powered by AI-assisted curation</span>
+      <span class="footer-dot"></span>
+      <span>Internal use only</span>
+    </div>
+  </div>
+</footer>
+<script>
+function toggleTheme() {
+  var html = document.documentElement;
+  var next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+}
+(function(){
+  var d = document.getElementById('current-date');
+  if (d) {
+    var now = new Date();
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    d.textContent = String(now.getDate()).padStart(2,'0') + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
+  }
+})();
+</script>
+</body>
+</html>
