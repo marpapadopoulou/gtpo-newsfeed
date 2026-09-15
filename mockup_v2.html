@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transformation Digest | NBG</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --deep-teal: #003841;
+  --nbg-teal: #007B85;
+  --medium-teal: #00ADBF;
+  --light-cyan: #ffffff;
+  --font: 'IBM Plex Sans', 'Aptos', 'Calibri', 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+/* Light theme */
+[data-theme="light"] {
+  --bg: #f5f8f6;
+  --bg-card: #ffffff;
+  --bg-surface: #f0f3f1;
+  --text-primary: #1a1a1a;
+  --text-secondary: #5a5f65;
+  --text-muted: #939793;
+  --border: rgba(190, 193, 190, 0.4);
+  --border-hover: #00ADBF;
+  --tag-bg: #f0f4f3;
+  --tag-text: #007B85;
+  --hero-bg: var(--deep-teal);
+  --hero-text: #ffffff;
+  --hero-muted: rgba(255,255,255,.7);
+  --hero-accent: #00DEF8;
+  --header-bg: var(--deep-teal);
+  --header-text: #ffffff;
+  --header-muted: rgba(255,255,255,.65);
+  --footer-bg: #003841;
+  --footer-text: rgba(255,255,255,.6);
+  --sidebar-header-bg: var(--deep-teal);
+  --sidebar-header-text: #ffffff;
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+  --bg: #0f1419;
+  --bg-card: #1c2128;
+  --bg-surface: #161b22;
+  --text-primary: #e6edf3;
+  --text-secondary: #8b949e;
+  --text-muted: #6e7681;
+  --border: #30363d;
+  --border-hover: #00ADBF;
+  --tag-bg: rgba(0, 123, 133, .15);
+  --tag-text: #00ADBF;
+  --hero-bg: #161b22;
+  --hero-text: #e6edf3;
+  --hero-muted: #8b949e;
+  --hero-accent: #00DEF8;
+  --header-bg: #0b0e12;
+  --header-text: #e6edf3;
+  --header-muted: #6e7681;
+  --footer-bg: #0b0e12;
+  --footer-text: #6e7681;
+  --sidebar-header-bg: #21262d;
+  --sidebar-header-text: #e6edf3;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background: var(--bg);
+  transition: background .3s, color .3s;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--nbg-teal); text-decoration: none; transition: color .2s; }
+[data-theme="dark"] a { color: var(--medium-teal); }
+a:hover { color: var(--medium-teal); }
+
+/* ── ACCENT LINE ── */
+.accent-line {
+  height: 3px;
+  background: linear-gradient(90deg, var(--deep-teal), var(--nbg-teal), var(--medium-teal));
+}
+
+/* ── HEADER ── */
+.site-header {
+  background: var(--header-bg);
+  color: var(--header-text);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(0, 56, 65, 0.25);
+  transition: background .3s;
+}
+
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 18px 32px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header-logo {
+  width: 40px;
+  height: 40px;
+  background: var(--nbg-teal);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 15px;
+  color: #fff;
+  flex-shrink: 0;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+}
+
+.header-text h1 {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -.2px;
+  line-height: 1.2;
+}
+
+.header-text h1 a { color: inherit; }
+
+.header-text .subtitle {
+  font-size: 13px;
+  color: var(--header-muted);
+  font-weight: 400;
+  margin-top: 2px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.header-meta {
+  text-align: right;
+  font-size: 12px;
+  color: var(--header-muted);
+}
+
+.update-badge {
+  display: inline-block;
+  background: var(--nbg-teal);
+  color: #fff;
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+
+/* Theme toggle */
+.theme-toggle {
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 20px;
+  width: 52px;
+  height: 28px;
+  cursor: pointer;
+  position: relative;
+  transition: background .3s, border-color .3s;
+  flex-shrink: 0;
+}
+
+.theme-toggle::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  background: var(--light-cyan);
+  border-radius: 50%;
+  transition: transform .3s;
+}
+
+[data-theme="dark"] .theme-toggle::after {
+  transform: translateX(24px);
+}
+
+.theme-toggle .icon-sun,
+.theme-toggle .icon-moon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 13px;
+  line-height: 1;
+  color: rgba(255,255,255,.7);
+}
+
+.theme-toggle .icon-sun { left: 7px; }
+.theme-toggle .icon-moon { right: 7px; }
+
+/* ── HERO ── */
+.hero {
+  background:
+    radial-gradient(ellipse at 20% 80%, rgba(0,173,191,.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(0,222,248,.12) 0%, transparent 50%),
+    linear-gradient(135deg, var(--deep-teal) 0%, #004a55 30%, #005e6a 60%, var(--nbg-teal) 100%);
+  color: var(--hero-text);
+  position: relative;
+  overflow: hidden;
+  transition: background .3s;
+}
+
+[data-theme="dark"] .hero {
+  background: var(--hero-bg);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,222,248,.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+[data-theme="dark"] .hero::before { opacity: .3; }
+
+.hero-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 32px 56px;
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 40px;
+  align-items: center;
+}
+
+.hero-content { max-width: 700px; }
+
+.hero-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--hero-accent);
+  margin-bottom: 16px;
+}
+
+.hero-label .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--hero-accent);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .4; }
+}
+
+.hero h2 {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.25;
+  margin-bottom: 16px;
+  letter-spacing: -.3px;
+}
+
+.hero-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  color: var(--hero-muted);
+}
+
+.hero-meta .source { font-weight: 600; color: rgba(255,255,255,.9); }
+[data-theme="dark"] .hero-meta .source { color: var(--hero-text); }
+
+.hero-meta .sep {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.4);
+}
+
+.hero-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.hero-tag {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: rgba(255,255,255,.1);
+  color: rgba(255,255,255,.7);
+  letter-spacing: .3px;
+  cursor: pointer;
+  transition: background .2s;
+  text-decoration: none;
+}
+
+.hero-tag:hover { background: rgba(255,255,255,.2); color: rgba(255,255,255,.9); }
+
+[data-theme="dark"] .hero-tag {
+  background: rgba(0, 173, 191, .15);
+  color: var(--medium-teal);
+}
+
+.hero-excerpt {
+  font-size: 16px;
+  line-height: 1.7;
+  color: rgba(255,255,255,.85);
+  margin-bottom: 24px;
+}
+
+[data-theme="dark"] .hero-excerpt { color: var(--hero-muted); }
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: var(--light-cyan);
+  color: var(--deep-teal);
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 6px;
+  transition: background .2s, transform .15s;
+}
+
+[data-theme="dark"] .hero-cta {
+  background: var(--medium-teal);
+  color: var(--deep-teal);
+}
+
+.hero-cta:hover {
+  background: var(--bg);
+  color: var(--deep-teal);
+  transform: translateY(-1px);
+  opacity: .9;
+}
+
+[data-theme="dark"] .hero-cta:hover {
+  background: var(--light-cyan);
+  color: var(--deep-teal);
+  opacity: 1;
+}
+
+.hero-cta .arrow { font-size: 18px; transition: transform .2s; }
+.hero-cta:hover .arrow { transform: translateX(4px); }
+
+/* Hero sidebar — At a Glance */
+.hero-sidebar {
+  background: rgba(255,255,255,.08);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 12px;
+  padding: 24px 22px;
+}
+
+[data-theme="dark"] .hero-sidebar {
+  background: rgba(255,255,255,.04);
+  border-color: var(--border);
+}
+
+.hero-sidebar h3 {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--hero-accent);
+  margin-bottom: 18px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
+
+[data-theme="dark"] .hero-sidebar h3 {
+  border-bottom-color: var(--border);
+}
+
+.quick-stat {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.quick-stat:last-child { margin-bottom: 0; }
+
+.quick-stat .number {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--hero-accent);
+  line-height: 1;
+}
+
+.quick-stat .qs-label {
+  font-size: 13px;
+  color: rgba(255,255,255,.7);
+  line-height: 1.3;
+}
+
+[data-theme="dark"] .quick-stat .qs-label { color: var(--hero-muted); }
+
+/* ── FILTER BAR ── */
+.filter-bar {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 32px 0;
+  display: none;
+  align-items: center;
+  gap: 10px;
+}
+
+.filter-bar.active { display: flex; }
+
+.filter-bar .filter-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.filter-bar .filter-tag {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 4px;
+  background: var(--tag-bg);
+  color: var(--tag-text);
+}
+
+.filter-bar .filter-clear {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--nbg-teal);
+  cursor: pointer;
+  margin-left: auto;
+  padding: 4px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--nbg-teal);
+  background: transparent;
+  transition: background .2s, color .2s;
+}
+
+[data-theme="dark"] .filter-bar .filter-clear {
+  color: var(--medium-teal);
+  border-color: var(--medium-teal);
+}
+
+.filter-bar .filter-clear:hover {
+  background: var(--nbg-teal);
+  color: #fff;
+}
+
+.article-card.filtered-out,
+.hero.filtered-out { display: none; }
+
+/* ── MAIN LAYOUT ── */
+.main-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 28px 32px 48px;
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 32px;
+  align-items: start;
+}
+
+/* Article count bar */
+.feed-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.feed-count {
+  font-size: 14px;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.feed-count strong {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* ── ARTICLE CARDS ── */
+.article-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.article-card {
+  background: var(--bg-card);
+  border-radius: 10px;
+  padding: 24px 26px;
+  border: 1px solid var(--border);
+  transition: all .2s ease;
+}
+
+.article-card:hover {
+  box-shadow: 0 4px 20px rgba(0, 56, 65, 0.08);
+  border-color: var(--border-hover);
+  transform: translateY(-1px);
+}
+
+[data-theme="dark"] .article-card:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.card-title-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.article-card h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.35;
+  flex: 1;
+  letter-spacing: -.1px;
+}
+
+.article-card h3 a {
+  color: inherit;
+  text-decoration: none;
+  transition: color .15s;
+}
+
+.article-card h3 a:hover { color: var(--nbg-teal); }
+[data-theme="dark"] .article-card h3 a:hover { color: var(--medium-teal); }
+
+.card-tags-inline {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.tag {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 4px;
+  background: var(--tag-bg);
+  color: var(--tag-text);
+  letter-spacing: .2px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background .2s, opacity .2s;
+  text-decoration: none;
+}
+
+a.tag:hover { opacity: .8; }
+
+.card-meta {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.card-meta .source-name {
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.card-meta .dot {
+  display: inline-block;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  margin: 0 8px;
+  vertical-align: middle;
+}
+
+.added-badge {
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: var(--nbg-teal);
+  background: var(--tag-bg);
+  padding: 2px 8px;
+  border-radius: 6px;
+  margin-left: 4px;
+}
+
+[data-theme="dark"] .added-badge { color: var(--medium-teal); }
+
+.card-summary {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-bottom: 12px;
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.read-more {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--nbg-teal);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: gap .2s, color .15s;
+}
+
+[data-theme="dark"] .read-more { color: var(--medium-teal); }
+.read-more:hover { gap: 8px; color: var(--medium-teal); }
+
+/* ── OLDER ARTICLES DIVIDER ── */
+.older-divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 28px 0 20px;
+}
+
+.older-divider::before,
+.older-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.older-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all .2s;
+  white-space: nowrap;
+}
+
+.older-toggle:hover {
+  border-color: var(--nbg-teal);
+  color: var(--nbg-teal);
+}
+
+[data-theme="dark"] .older-toggle:hover {
+  border-color: var(--medium-teal);
+  color: var(--medium-teal);
+}
+
+.older-toggle .arrow-icon {
+  font-size: 11px;
+  transition: transform .3s;
+}
+
+.older-toggle.expanded .arrow-icon {
+  transform: rotate(180deg);
+}
+
+.older-articles {
+  display: none;
+}
+
+.older-articles.visible {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: fadeIn .3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.older-count {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: sticky;
+  top: 100px;
+}
+
+.sidebar-card {
+  background: var(--bg-card);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transition: background .3s, border-color .3s;
+}
+
+.sidebar-card .card-header {
+  background: var(--sidebar-header-bg);
+  color: var(--sidebar-header-text);
+  padding: 14px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background .3s;
+}
+
+.sidebar-card .card-body { padding: 8px 20px 16px; }
+
+.trending-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  transition: border-color .3s;
+}
+
+.trending-item:last-child { border-bottom: none; }
+
+.trending-rank {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-muted);
+  min-width: 24px;
+  opacity: .5;
+}
+
+.trending-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+.trending-count {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 1px;
+}
+
+/* ── FOOTER ── */
+.site-footer {
+  background: var(--footer-bg);
+  color: var(--footer-text);
+  text-align: center;
+  padding: 28px 32px;
+  font-size: 13px;
+  transition: background .3s;
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-brand { font-weight: 500; color: rgba(255,255,255,.7); }
+[data-theme="dark"] .footer-brand { color: #8b949e; }
+
+.footer-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 12px;
+}
+
+.footer-dot {
+  width: 3px;
+  height: 3px;
+  background: rgba(255,255,255,.3);
+  border-radius: 50%;
+}
+
+[data-theme="dark"] .footer-dot { background: #30363d; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-sidebar { display: none; }
+}
+
+@media (max-width: 960px) {
+  .main-container {
+    grid-template-columns: 1fr;
+    padding: 20px 16px 40px;
+  }
+  .sidebar {
+    position: static;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .header-inner { padding: 16px; }
+  .header-meta { display: none; }
+}
+
+@media (max-width: 640px) {
+  .article-card { padding: 20px 16px; }
+  .article-card h3 { font-size: 15px; }
+  .header-text h1 { font-size: 17px; }
+  .header-text .subtitle { display: none; }
+  .hero-inner { padding: 36px 16px 44px; }
+  .hero h2 { font-size: 24px; }
+  .card-title-row { flex-direction: column; gap: 8px; }
+  .card-tags-inline { align-self: flex-start; }
+  .footer-inner { flex-direction: column; gap: 8px; }
+}
+</style>
+</head>
+<body>
+
+<div class="accent-line"></div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-left">
+      <div class="header-logo">NBG</div>
+      <div class="header-text">
+        <h1><a href="#">Transformation Digest</a></h1>
+        <div class="subtitle">Corporate Transformation Division | National Bank of Greece</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="header-meta">
+        <div class="update-badge">13 Aug 2026</div>
+        <div>Last updated: 13 Aug 2026</div>
+      </div>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <span class="icon-sun">&#9788;</span>
+        <span class="icon-moon">&#9790;</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="hero" data-topics="AI,Customer Experience,Change Management">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-label">
+        <span class="dot"></span>
+        Featured Story
+      </div>
+      <h2>From share of wallet to share of trust</h2>
+      <div class="hero-meta">
+        <span class="source">Euromoney</span>
+        <span class="sep"></span>
+        <span>31 Jul 2026</span>
+        <span class="sep"></span>
+        <a href="#" class="hero-tag" data-filter-topic="AI">AI</a>
+        <a href="#" class="hero-tag" data-filter-topic="Customer Experience">Customer Experience</a>
+        <a href="#" class="hero-tag" data-filter-topic="Change Management">Change Management</a>
+      </div>
+      <p class="hero-excerpt">Santander Portugal has built a three-pillar CX architecture &mdash; digital intelligence, human proximity, and continuous engagement &mdash; that connects AI deployment directly to customer relationship depth and measurable business outcomes. With 430+ AI use cases developed by business teams, the bank demonstrates a federated AI model where proximity to customer problems drives innovation.</p>
+      <a href="#" class="hero-cta">Read Full Article <span class="arrow">&rarr;</span></a>
+    </div>
+    <aside class="hero-sidebar">
+      <h3>This Edition at a Glance</h3>
+      <div class="quick-stat">
+        <span class="number">4</span>
+        <span class="qs-label">New articles this week</span>
+      </div>
+      <div class="quick-stat">
+        <span class="number">7</span>
+        <span class="qs-label">Topics covered</span>
+      </div>
+      <div class="quick-stat">
+        <span class="number">33%</span>
+        <span class="qs-label">Focus on Change Management</span>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<div class="filter-bar" id="filterBar">
+  <span class="filter-label">Filtered by:</span>
+  <span class="filter-tag" id="filterTag"></span>
+  <button class="filter-clear" id="filterClear">Clear filter</button>
+</div>
+
+<main class="main-container">
+  <section class="article-feed">
+    <div class="feed-header">
+      <span class="feed-count"><strong>4 new articles</strong> this week</span>
+      <span class="feed-count">Newest first</span>
+    </div>
+
+    <div class="article-list">
+
+      <article class="article-card" data-topics="Technology,AI,Change Management">
+        <div class="card-title-row">
+          <h3><a href="#">Engineering for an AI-enabled bank with a heart</a></h3>
+          <div class="card-tags-inline">
+            <a href="#" class="tag" data-filter-topic="Technology">Technology</a>
+            <a href="#" class="tag" data-filter-topic="AI">AI</a>
+            <a href="#" class="tag" data-filter-topic="Change Management">Change Management</a>
+          </div>
+        </div>
+        <div class="card-meta">
+          <span class="source-name">Euromoney</span><span class="dot"></span>27 Jul 2026<span class="dot"></span>3 min read<span class="dot"></span><span class="added-badge">Added 2026-08-13</span>
+        </div>
+        <p class="card-summary">DBS Bank outlines its strategic framework for becoming an AI-enabled bank anchored on a proprietary R.I.S.E. framework covering Resilience, Innovation, Security, and Efficiency.</p>
+        <div class="card-footer">
+          <a href="#" class="read-more">Read more <span>&rarr;</span></a>
+        </div>
+      </article>
+
+      <article class="article-card" data-topics="Processes,Change Management,Corporate Banking">
+        <div class="card-title-row">
+          <h3><a href="#">Managing transformation risk in divestitures</a></h3>
+          <div class="card-tags-inline">
+            <a href="#" class="tag" data-filter-topic="Processes">Processes</a>
+            <a href="#" class="tag" data-filter-topic="Change Management">Change Management</a>
+            <a href="#" class="tag" data-filter-topic="Corporate Banking">Corporate Banking</a>
+          </div>
+        </div>
+        <div class="card-meta">
+          <span class="source-name">PwC</span><span class="dot"></span>24 Jul 2026<span class="dot"></span>4 min read<span class="dot"></span><span class="added-badge">Added 2026-08-13</span>
+        </div>
+        <p class="card-summary">PwC outlines a structured framework for managing transformation risk during divestitures, focusing on four risk concentration areas: regulatory reporting, technology dependencies, data separation, and operational continuity.</p>
+        <div class="card-footer">
+          <a href="#" class="read-more">Read more <span>&rarr;</span></a>
+        </div>
+      </article>
+
+      <article class="article-card" data-topics="AI,Processes,Change Management">
+        <div class="card-title-row">
+          <h3><a href="#">Agentic AI Governance, Risk, and Controls for Business Leaders</a></h3>
+          <div class="card-tags-inline">
+            <a href="#" class="tag" data-filter-topic="AI">AI</a>
+            <a href="#" class="tag" data-filter-topic="Processes">Processes</a>
+            <a href="#" class="tag" data-filter-topic="Change Management">Change Management</a>
+          </div>
+        </div>
+        <div class="card-meta">
+          <span class="source-name">Bain</span><span class="dot"></span>28 Jul 2026<span class="dot"></span>7 min read<span class="dot"></span><span class="added-badge">Added 2026-08-13</span>
+        </div>
+        <p class="card-summary">Bain outlines why traditional AI governance frameworks are fundamentally insufficient for agentic AI systems that act autonomously, and proposes a new control architecture for safe scaling.</p>
+        <div class="card-footer">
+          <a href="#" class="read-more">Read more <span>&rarr;</span></a>
+        </div>
+      </article>
+
+      <article class="article-card" data-topics="Retail Banking,Change Management,Customer Experience">
+        <div class="card-title-row">
+          <h3><a href="#">American Banks Left the Door Open. European Fintechs Are Walking In.</a></h3>
+          <div class="card-tags-inline">
+            <a href="#" class="tag" data-filter-topic="Retail Banking">Retail Banking</a>
+            <a href="#" class="tag" data-filter-topic="Change Management">Change Management</a>
+            <a href="#" class="tag" data-filter-topic="Customer Experience">Customer Experience</a>
+          </div>
+        </div>
+        <div class="card-meta">
+          <span class="source-name">Global Finance</span><span class="dot"></span>10 Aug 2026<span class="dot"></span>4 min read<span class="dot"></span><span class="added-badge">Added 2026-08-13</span>
+        </div>
+        <p class="card-summary">European fintechs like Revolut are expanding aggressively into the U.S. market, leveraging experience navigating Europe's fragmented regulatory landscape as a competitive moat.</p>
+        <div class="card-footer">
+          <a href="#" class="read-more">Read more <span>&rarr;</span></a>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="older-divider">
+      <button class="older-toggle" id="olderToggle" onclick="toggleOlder()">
+        <span id="olderLabel">Show older articles</span>
+        <span class="older-count" id="olderCount">(4 more)</span>
+        <span class="arrow-icon">&#9660;</span>
+      </button>
+    </div>
+
+    <div class="older-articles" id="olderArticles">
+    <div class="article-list">
+
+      <article class="article-card" data-topics="Change Management,AI,Processes">
+        <div class="card-title-row">
+          <h3><a href="#">2026 Global Human Capital Trends</a></h3>
+          <div class="card-tags-inline">
+            <a href="#" class="tag" data-filter-topic="Change Management">Change Management</a>
+            <a href="#" class="tag" data-filter-topic="AI">AI</a>
+            <a href="#" class="tag" data-filter-topic="Processes">Processes</a>
+          </div>
+        </div>
+        <div class="card-meta">
+          <span class="source-name">Deloitte</span><span class="dot"></span>2026<span class="dot"></span>5 min read<span class="dot"></span><span class="added-badge">Added 2026-08-06</span>
+        </div>
+        <p class="card-summary">Deloitte's 2026 report argues that competitive advantage is shifting from technology differentiation to human capability, identifying three organizational tipping points driven by AI adoption.</p>
+        <div class="card-footer">
+          <a href="#" class="read-more">Read more <span>&rarr;</span></a>
+        </div>
+      </article>
+
+      <article class="article-card" data-topics="Corporate Banking,Processes,Technology">
+        <div class="card-title-row">
+          <h3><a href="#">ISO 20022: From go-live to real value creation</a></h3>
+          <div class="card-tags-inline">
+            <a href="#" class="tag" data-filter-topic="Corporate Banking">Corporate Banking</a>
+            <a href="#" class="tag" data-filter-topic="Processes">Processes</a>
+            <a href="#" class="tag" data-filter-topic="Technology">Technology</a>
+          </div>
+        </div>
+        <div class="card-meta">
+          <span class="source-name">Capgemini</span><span class="dot"></span>31 Jul 2026<span class="dot"></span>8 min read<span class="dot"></span><span class="added-badge">Added 2026-08-06</span>
+        </div>
+        <p class="card-summary">ISO 20022 is moving beyond Phase 1 compliance into Phase 2 value realization, with hard deadlines forcing banks to embed structured data natively into workflows, analytics, and client engagement.</p>
+        <div class="card-footer">
+          <a href="#" class="read-more">Read more <span>&rarr;</span></a>
+        </div>
+      </article>
+
+      <article class="article-card" data-topics="AI,Processes,Change Management">
+        <div class="card-title-row">
+          <h3><a href="#">For AI Value, Focus on Your Use Cases</a></h3>
+          <div class="card-tags-inline">
+            <a href="#" class="tag" data-filter-topic="AI">AI</a>
+            <a href="#" class="tag" data-filter-topic="Processes">Processes</a>
+            <a href="#" class="tag" data-filter-topic="Change Management">Change Management</a>
+          </div>
+        </div>
+        <div class="card-meta">
+          <span class="source-name">Gartner</span><span class="dot"></span>2025<span class="dot"></span>4 min read<span class="dot"></span><span class="added-badge">Added 2026-08-06</span>
+        </div>
+        <p class="card-summary">Gartner outlines a three-pillar risk framework &mdash; cost, cybersecurity, and trustworthiness &mdash; that CIOs must address before scaling AI from pilot to production across the enterprise.</p>
+        <div class="card-footer">
+          <a href="#" class="read-more">Read more <span>&rarr;</span></a>
+        </div>
+      </article>
+
+      <article class="article-card" data-topics="AI,Customer Experience,Change Management">
+        <div class="card-title-row">
+          <h3><a href="#">Why AI should stay invisible</a></h3>
+          <div class="card-tags-inline">
+            <a href="#" class="tag" data-filter-topic="AI">AI</a>
+            <a href="#" class="tag" data-filter-topic="Customer Experience">Customer Experience</a>
+            <a href="#" class="tag" data-filter-topic="Change Management">Change Management</a>
+          </div>
+        </div>
+        <div class="card-meta">
+          <span class="source-name">Capgemini</span><span class="dot"></span>27 Jul 2026<span class="dot"></span>6 min read<span class="dot"></span><span class="added-badge">Added 2026-08-06</span>
+        </div>
+        <p class="card-summary">Capgemini argues that the next frontier in AI deployment is invisible AI &mdash; embedding AI where it creates measurable user value rather than showcasing it as a visible feature.</p>
+        <div class="card-footer">
+          <a href="#" class="read-more">Read more <span>&rarr;</span></a>
+        </div>
+      </article>
+
+    </div>
+    </div>
+  </section>
+
+  <aside class="sidebar">
+    <div class="sidebar-card">
+      <div class="card-header">
+        <span>&#8593;</span> Trending Topics
+      </div>
+      <div class="card-body">
+        <div class="trending-item">
+          <span class="trending-rank">1</span>
+          <div>
+            <div class="trending-text">Change Management</div>
+            <div class="trending-count">8 articles</div>
+          </div>
+        </div>
+        <div class="trending-item">
+          <span class="trending-rank">2</span>
+          <div>
+            <div class="trending-text">AI</div>
+            <div class="trending-count">6 articles</div>
+          </div>
+        </div>
+        <div class="trending-item">
+          <span class="trending-rank">3</span>
+          <div>
+            <div class="trending-text">Processes</div>
+            <div class="trending-count">5 articles</div>
+          </div>
+        </div>
+        <div class="trending-item">
+          <span class="trending-rank">4</span>
+          <div>
+            <div class="trending-text">Customer Experience</div>
+            <div class="trending-count">3 articles</div>
+          </div>
+        </div>
+        <div class="trending-item">
+          <span class="trending-rank">5</span>
+          <div>
+            <div class="trending-text">Technology</div>
+            <div class="trending-count">2 articles</div>
+          </div>
+        </div>
+        <div class="trending-item">
+          <span class="trending-rank">6</span>
+          <div>
+            <div class="trending-text">Corporate Banking</div>
+            <div class="trending-count">2 articles</div>
+          </div>
+        </div>
+        <div class="trending-item">
+          <span class="trending-rank">7</span>
+          <div>
+            <div class="trending-text">Retail Banking</div>
+            <div class="trending-count">1 article</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">National Bank of Greece &mdash; Corporate Transformation Division</div>
+    <div class="footer-right">
+      <span>Powered by AI-assisted curation</span>
+      <span class="footer-dot"></span>
+      <span>Internal use only</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function() {
+  var active = null;
+  var bar = document.getElementById('filterBar');
+  var tag = document.getElementById('filterTag');
+  var hero = document.querySelector('.hero');
+  var cards = document.querySelectorAll('.article-card');
+
+  function applyFilter(topic) {
+    active = topic;
+    bar.classList.add('active');
+    tag.textContent = topic;
+
+    if (hero) {
+      var ht = (hero.getAttribute('data-topics') || '').split(',');
+      hero.classList.toggle('filtered-out', ht.indexOf(topic) === -1);
+    }
+    cards.forEach(function(c) {
+      var ct = (c.getAttribute('data-topics') || '').split(',');
+      c.classList.toggle('filtered-out', ct.indexOf(topic) === -1);
+    });
+  }
+
+  function clearFilter() {
+    active = null;
+    bar.classList.remove('active');
+    if (hero) hero.classList.remove('filtered-out');
+    cards.forEach(function(c) { c.classList.remove('filtered-out'); });
+  }
+
+  document.addEventListener('click', function(e) {
+    var el = e.target.closest('[data-filter-topic]');
+    if (el) {
+      e.preventDefault();
+      var topic = el.getAttribute('data-filter-topic');
+      if (active === topic) { clearFilter(); } else { applyFilter(topic); }
+    }
+  });
+
+  document.getElementById('filterClear').addEventListener('click', clearFilter);
+})();
+
+function toggleTheme() {
+  var html = document.documentElement;
+  var current = html.getAttribute('data-theme');
+  html.setAttribute('data-theme', current === 'light' ? 'dark' : 'light');
+}
+
+function toggleOlder() {
+  var section = document.getElementById('olderArticles');
+  var btn = document.getElementById('olderToggle');
+  var label = document.getElementById('olderLabel');
+  var count = document.getElementById('olderCount');
+  var isVisible = section.classList.contains('visible');
+
+  section.classList.toggle('visible');
+  btn.classList.toggle('expanded');
+
+  if (isVisible) {
+    label.textContent = 'Show older articles';
+    count.style.display = '';
+  } else {
+    label.textContent = 'Hide older articles';
+    count.style.display = 'none';
+  }
+}
+</script>
+
+</body>
+</html>

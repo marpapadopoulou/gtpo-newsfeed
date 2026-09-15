@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<script>(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t)})()</script>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transformation Digest | NBG</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="accent-line"></div>
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-left">
+      <div class="header-logo">NBG</div>
+      <div class="header-text">
+        <h1><a href="index.html">Transformation Digest</a></h1>
+        <div class="subtitle">Corporate Transformation Division | National Bank of Greece</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="header-meta">
+        <div class="update-badge" id="current-date">15 Sep 2026</div>
+        <div>Last updated: 15 Sep 2026</div>
+      </div>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <span class="icon-sun">&#9788;</span>
+        <span class="icon-moon">&#9790;</span>
+      </button>
+    </div>
+  </div>
+</header><nav class="feed-tabs" id="feedTabs">
+  <button class="feed-tab active" data-feed="global">Global Transformation</button>
+  <button class="feed-tab" data-feed="greek">Greek Banking</button>
+</nav>
+
+
+<div class="feed-section active" data-feed="global" id="globalFeed">
+<section class="hero" data-topics="Change Management,AI,Corporate Banking">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-label">
+        <span class="dot"></span>
+        Featured Story
+      </div>
+      <h2>Six Provocations to Future-Proof Your Bank</h2>
+      <div class="hero-meta">
+        <span class="source">International Banker</span>
+        <span class="sep"></span>
+        <span>14 Sep 2026</span>
+        <span class="sep"></span>
+        <a href="#" class="hero-tag" data-filter-topic="Change Management">Change Management</a> <a href="#" class="hero-tag" data-filter-topic="AI">AI</a> <a href="#" class="hero-tag" data-filter-topic="Corporate Banking">Corporate Banking</a>
+      </div>
+      <p class="hero-excerpt">Bain &amp; Company&#x27;s APAC Banking Practice head outlines six strategic provocations for bank leaders, arguing that traditional full-service models are losing ground—from 95% of addressable revenue in the early 2000s to a projected 65% by 2030. The article frames threats from agentic AI, stablecoins, platforms, and private credit as requiring CEOs to make deliberate strategic choices about where to be indispensable rather than spreading thin. Key themes include trust as measurable capital, speed of innovation, and ecosystem orchestration.</p>
+      <a href="articles/six-provocations-to-future-proof-your-bank.html" class="hero-cta">
+        Read Full Article
+        <span class="arrow">&rarr;</span>
+      </a>
+    </div>
+    <aside class="hero-sidebar">
+      <h3>This Edition at a Glance</h3>
+            <div class="quick-stat">
+        <span class="number">3</span>
+        <span class="qs-label">New articles this week</span>
+      </div>
+      <div class="quick-stat">
+        <span class="number">7</span>
+        <span class="qs-label">Topics covered</span>
+      </div>
+      <div class="quick-stat">
+        <span class="number">28%</span>
+        <span class="qs-label">Focus on AI</span>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<div class="filter-bar" id="filterBar">
+  <span class="filter-label">Filtered by:</span>
+  <span class="filter-tag" id="filterTag"></span>
+  <button class="filter-clear" id="filterClear">Clear filter</button>
+</div>
+<script>
+(function() {
+  var active = null;
+  var bar = document.getElementById('filterBar');
+  var tag = document.getElementById('filterTag');
+  var hero = document.querySelector('.hero');
+  var cards = document.querySelectorAll('.article-card');
+
+  function applyFilter(topic) {
+    active = topic;
+    bar.classList.add('active');
+    tag.textContent = topic;
+
+    if (hero) {
+      var ht = (hero.getAttribute('data-topics') || '').split(',');
+      hero.classList.toggle('filtered-out', ht.indexOf(topic) === -1);
+    }
+    cards.forEach(function(c) {
+      var ct = (c.getAttribute('data-topics') || '').split(',');
+      c.classList.toggle('filtered-out', ct.indexOf(topic) === -1);
+    });
+    var older = document.getElementById('olderArticles');
+    if (older) { older.classList.add('visible'); }
+    var btn = document.getElementById('olderToggle');
+    if (btn) { btn.classList.add('expanded'); }
+    var lbl = document.getElementById('olderLabel');
+    if (lbl) { lbl.textContent = 'Hide older articles'; }
+    var cnt = document.getElementById('olderCount');
+    if (cnt) { cnt.style.display = 'none'; }
+  }
+
+  function clearFilter() {
+    active = null;
+    bar.classList.remove('active');
+    if (hero) hero.classList.remove('filtered-out');
+    cards.forEach(function(c) { c.classList.remove('filtered-out'); });
+  }
+
+  document.addEventListener('click', function(e) {
+    var el = e.target.closest('[data-filter-topic]');
+    if (el) {
+      e.preventDefault();
+      var topic = el.getAttribute('data-filter-topic');
+      if (active === topic) { clearFilter(); } else { applyFilter(topic); }
+    }
+  });
+
+  document.getElementById('filterClear').addEventListener('click', clearFilter);
+})();
+
+function toggleOlder() {
+  var section = document.getElementById('olderArticles');
+  var btn = document.getElementById('olderToggle');
+  var label = document.getElementById('olderLabel');
+  var count = document.getElementById('olderCount');
+  var isVisible = section.classList.contains('visible');
+  section.classList.toggle('visible');
+  btn.classList.toggle('expanded');
+  if (isVisible) {
+    label.textContent = 'Show older articles';
+    count.style.display = '';
+  } else {
+    label.textContent = 'Hide older articles';
+    count.style.display = 'none';
+  }
+}
+</script>
+
+<main class="main-container">
+  <section class="article-feed">
+    <div class="feed-header">
+      <span class="feed-count"><strong>3 new articles</strong> this week</span>
+      <span class="feed-count">Newest first</span>
+    </div>
+    <div class="article-list">
+    <article class="article-card" data-topics="AI,Change Management,Customer Experience">
+      <div class="card-title-row">
+        <h3><a href="articles/why-ai-adoption-is-becoming-a-cross-cultural-challenge.html">Why AI Adoption Is Becoming a Cross-Cultural Challenge</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="AI">AI</a>
+<a href="#" class="tag" data-filter-topic="Change Management">Change Management</a>
+<a href="#" class="tag" data-filter-topic="Customer Experience">Customer Experience</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">International Banker</span><span class="dot"></span>10 Sep 2026<span class="dot"></span>8 min read</div>
+      <p class="card-summary">AI adoption in banking is increasingly a cross-cultural challenge rather than a purely technological one. Two banks deploying identical AI models can produce vastly different outcomes based on how well they navigate...</p>
+      <div class="card-footer">
+        <a href="articles/why-ai-adoption-is-becoming-a-cross-cultural-challenge.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="AI,Processes,Change Management">
+      <div class="card-title-row">
+        <h3><a href="articles/how-companies-can-close-the-ai-execution-gap-in-operations.html">How companies can close the AI execution gap in operations</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="AI">AI</a>
+<a href="#" class="tag" data-filter-topic="Processes">Processes</a>
+<a href="#" class="tag" data-filter-topic="Change Management">Change Management</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">PwC</span><span class="dot"></span>10 Sep 2026<span class="dot"></span>4 min read</div>
+      <p class="card-summary">PwC&#x27;s 2026 Digital Trends in Operations Survey reveals a critical AI execution gap: while 85% of leaders believe they are ahead of competitors in digital transformation, 89% admit tech investments have fallen short of...</p>
+      <div class="card-footer">
+        <a href="articles/how-companies-can-close-the-ai-execution-gap-in-operations.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="Change Management,AI,Processes">
+      <div class="card-title-row">
+        <h3><a href="articles/2026-global-human-capital-trends.html">2026 Global Human Capital Trends</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="Change Management">Change Management</a>
+<a href="#" class="tag" data-filter-topic="AI">AI</a>
+<a href="#" class="tag" data-filter-topic="Processes">Processes</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">Deloitte</span><span class="dot"></span>07 Sep 2026<span class="dot"></span>5 min read</div>
+      <p class="card-summary">Deloitte&#x27;s 2026 Global Human Capital Trends report argues that competitive advantage is shifting from technology differentiation to human capability, with 7 in 10 leaders prioritizing agility as their primary strategy....</p>
+      <div class="card-footer">
+        <a href="articles/2026-global-human-capital-trends.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="AI,Technology,Change Management">
+      <div class="card-title-row">
+        <h3><a href="articles/2026-hype-cycle-for-agentic-ai-gartner.html">2026 Hype Cycle for Agentic AI | Gartner</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="AI">AI</a>
+<a href="#" class="tag" data-filter-topic="Technology">Technology</a>
+<a href="#" class="tag" data-filter-topic="Change Management">Change Management</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">Gartner</span><span class="dot"></span>07 Sep 2026<span class="dot"></span>3 min read</div>
+      <p class="card-summary">Gartner&#x27;s 2026 Hype Cycle for Agentic AI maps the maturity of AI agent technologies, revealing that while 60%+ of organizations plan deployment within two years, only 17% have done so — exposing a significant...</p>
+      <div class="card-footer">
+        <a href="articles/2026-hype-cycle-for-agentic-ai-gartner.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="AI,Processes,Technology">
+      <div class="card-title-row">
+        <h3><a href="articles/for-ai-value-focus-on-your-use-cases.html">For AI Value, Focus on Your Use Cases</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="AI">AI</a>
+<a href="#" class="tag" data-filter-topic="Processes">Processes</a>
+<a href="#" class="tag" data-filter-topic="Technology">Technology</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">Gartner</span><span class="dot"></span>07 Sep 2026<span class="dot"></span>4 min read</div>
+      <p class="card-summary">Gartner outlines a three-pillar risk framework for scaling AI beyond pilots: cost discipline, cybersecurity hardening, and trustworthiness/governance. Only 23% of CxOs report confidence in GenAI outputs, and just one in...</p>
+      <div class="card-footer">
+        <a href="articles/for-ai-value-focus-on-your-use-cases.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    </div>
+
+    <div class="older-divider">
+      <button class="older-toggle" id="olderToggle" onclick="toggleOlder()">
+        <span id="olderLabel">Show older articles</span>
+        <span class="older-count" id="olderCount">(23 more)</span>
+        <span class="arrow-icon">&#9660;</span>
+      </button>
+    </div>
+    <div class="older-articles" id="olderArticles">
+    <article class="article-card" data-topics="AI,Change Management,Technology">
+      <div class="card-title-row">
+        <h3><a href="articles/how-enterprises-can-advance-ai-native-business-models.html">How Enterprises Can Advance AI-Native Business Models</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="AI">AI</a>
+<a href="#" class="tag" data-filter-topic="Change Management">Change Management</a>
+<a href="#" class="tag" data-filter-topic="Technology">Technology</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">Gartner</span><span class="dot"></span>07 Sep 2026<span class="dot"></span>3 min read</div>
+      <p class="card-summary">Gartner introduces an AI-native business model framework with a 5-stage maturity scorecard, positioning AI not as an enhancement tool but as the foundational layer of how businesses create and deliver value. The...</p>
+      <div class="card-footer">
+        <a href="articles/how-enterprises-can-advance-ai-native-business-models.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="Change Management,AI">
+      <div class="card-title-row">
+        <h3><a href="articles/artificial-intelligence-and-the-future-of-entry-level-work-a-framework-for-safeg.html">Artificial Intelligence and the Future of Entry-Level Work: A Framework for Safeguarding and Reinventing Early Career Pathways</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="Change Management">Change Management</a>
+<a href="#" class="tag" data-filter-topic="AI">AI</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">World Economic Forum</span><span class="dot"></span>07 Sep 2026<span class="dot"></span>1 min read</div>
+      <p class="card-summary">A WEF/PwC report examines how AI is disrupting entry-level roles globally, with over one-third of young workers in jobs facing medium-to-high AI exposure. It introduces a four-dimension framework covering job access,...</p>
+      <div class="card-footer">
+        <a href="articles/artificial-intelligence-and-the-future-of-entry-level-work-a-framework-for-safeg.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="AI,Technology,Customer Experience">
+      <div class="card-title-row">
+        <h3><a href="articles/fsi-predictions-2026.html">FSI Predictions 2026</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="AI">AI</a>
+<a href="#" class="tag" data-filter-topic="Technology">Technology</a>
+<a href="#" class="tag" data-filter-topic="Customer Experience">Customer Experience</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">Deloitte</span><span class="dot"></span>07 Sep 2026<span class="dot"></span>4 min read</div>
+      <p class="card-summary">Deloitte&#x27;s FSI Predictions 2026 outlines major structural shifts in US financial services, covering agentic AI in wealth management, private capital democratization, stablecoin payment rails, and core banking...</p>
+      <div class="card-footer">
+        <a href="articles/fsi-predictions-2026.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="AI,Processes,Technology">
+      <div class="card-title-row">
+        <h3><a href="articles/ai-agents-need-an-offboarding-plan-too.html">AI Agents Need an Offboarding Plan Too</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="AI">AI</a>
+<a href="#" class="tag" data-filter-topic="Processes">Processes</a>
+<a href="#" class="tag" data-filter-topic="Technology">Technology</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">Capgemini</span><span class="dot"></span>04 Sep 2026<span class="dot"></span>4 min read</div>
+      <p class="card-summary">This Capgemini article addresses the overlooked challenge of AI agent lifecycle management, specifically the decommissioning and offboarding of AI agents once they are embedded in operational processes. It argues that...</p>
+      <div class="card-footer">
+        <a href="articles/ai-agents-need-an-offboarding-plan-too.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="Corporate Banking,Retail Banking,Customer Experience">
+      <div class="card-title-row">
+        <h3><a href="articles/interview-with-mr-thorsten-seeger-member-of-the-management-board-sme-bank.html">Interview with Mr. Thorsten Seeger, Member of the Management Board, SME Bank</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="Corporate Banking">Corporate Banking</a>
+<a href="#" class="tag" data-filter-topic="Retail Banking">Retail Banking</a>
+<a href="#" class="tag" data-filter-topic="Customer Experience">Customer Experience</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">International Banker</span><span class="dot"></span>03 Sep 2026<span class="dot"></span>10 min read</div>
+      <p class="card-summary">Thorsten Seeger of Lithuania&#x27;s SME Bank outlines how the bank operates as a high-speed digital distribution engine bridging the EU&#x27;s €39B annual SME financing gap, emphasizing that the real bottleneck is not capital...</p>
+      <div class="card-footer">
+        <a href="articles/interview-with-mr-thorsten-seeger-member-of-the-management-board-sme-bank.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="Change Management,Processes,AI">
+      <div class="card-title-row">
+        <h3><a href="articles/return-to-basics-why-execution-matters-more-than-strategy.html">Return to Basics: Why Execution Matters More Than Strategy</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="Change Management">Change Management</a>
+<a href="#" class="tag" data-filter-topic="Processes">Processes</a>
+<a href="#" class="tag" data-filter-topic="AI">AI</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">International Banker</span><span class="dot"></span>02 Sep 2026<span class="dot"></span>7 min read</div>
+      <p class="card-summary">Alvarez &amp; Marsal&#x27;s Asad Ahmed argues that banks&#x27; core competitive problem is not strategy formulation but execution discipline — institutions repeatedly move to the next transformation wave before embedding the previous...</p>
+      <div class="card-footer">
+        <a href="articles/return-to-basics-why-execution-matters-more-than-strategy.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="Processes,AI,Technology">
+      <div class="card-title-row">
+        <h3><a href="articles/when-fraud-moves-at-machine-speed-your-defense-can-t-move-at-human-speed.html">When fraud moves at machine speed, your defense can’t move at human speed</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="Processes">Processes</a>
+<a href="#" class="tag" data-filter-topic="AI">AI</a>
+<a href="#" class="tag" data-filter-topic="Technology">Technology</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">Capgemini</span><span class="dot"></span>02 Sep 2026<span class="dot"></span>4 min read</div>
+      <p class="card-summary">Fraud operations face a structural operating model crisis: attackers have automated at machine speed while investigation teams still rely on manual queues, spreadsheets, and hand-typed narratives. The article argues the...</p>
+      <div class="card-footer">
+        <a href="articles/when-fraud-moves-at-machine-speed-your-defense-can-t-move-at-human-speed.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="AI,Change Management,Processes">
+      <div class="card-title-row">
+        <h3><a href="articles/ai-transformation-the-fears-are-new-the-answer-isnt.html">AI Transformation: The Fears Are New. The Answer Isn&#x27;t.</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="AI">AI</a>
+<a href="#" class="tag" data-filter-topic="Change Management">Change Management</a>
+<a href="#" class="tag" data-filter-topic="Processes">Processes</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">Bain</span><span class="dot"></span>01 Sep 2026<span class="dot"></span>10 min read</div>
+      <p class="card-summary">Bain argues that the primary bottleneck in AI transformation is human, not technological — only 1 in 5 CEOs report realizing most of their targeted AI results, with resistance, skill gaps, and pilot-to-scale failures as...</p>
+      <div class="card-footer">
+        <a href="articles/ai-transformation-the-fears-are-new-the-answer-isnt.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="Corporate Banking,Customer Experience,Retail Banking">
+      <div class="card-title-row">
+        <h3><a href="articles/how-the-caribbeans-best-bank-for-smes-built-an-ecosystem-euromoney.html">How the Caribbean&#x27;s best bank for SMEs built an ecosystem - Euromoney</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="Corporate Banking">Corporate Banking</a>
+<a href="#" class="tag" data-filter-topic="Customer Experience">Customer Experience</a>
+<a href="#" class="tag" data-filter-topic="Retail Banking">Retail Banking</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">Euromoney</span><span class="dot"></span>01 Sep 2026<span class="dot"></span>3 min read</div>
+      <p class="card-summary">Banreservas built a decade-long SME ecosystem platform (Fomenta Pymes) combining credit, insurance, digital tools, financial education, and legal support — serving 157,000 SMEs and disbursing $4.7B. The model reframes...</p>
+      <div class="card-footer">
+        <a href="articles/how-the-caribbeans-best-bank-for-smes-built-an-ecosystem-euromoney.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="AI,Processes,Change Management">
+      <div class="card-title-row">
+        <h3><a href="articles/agentic-ai-transforming-compliance-at-financial-institutions.html">Agentic AI Transforming Compliance at Financial Institutions</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="AI">AI</a>
+<a href="#" class="tag" data-filter-topic="Processes">Processes</a>
+<a href="#" class="tag" data-filter-topic="Change Management">Change Management</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">Oliver Wyman</span><span class="dot"></span>31 Aug 2026<span class="dot"></span>1 min read</div>
+      <p class="card-summary">Oliver Wyman&#x27;s report outlines how agentic AI can transform compliance functions at financial institutions, shifting teams from reactive task execution to strategic advisory roles. Key findings include potential...</p>
+      <div class="card-footer">
+        <a href="articles/agentic-ai-transforming-compliance-at-financial-institutions.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="Corporate Banking,Technology,AI">
+      <div class="card-title-row">
+        <h3><a href="articles/digital-assets-reshaping-the-future-of-wholesale-banking.html">Digital assets reshaping the future of wholesale banking</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="Corporate Banking">Corporate Banking</a>
+<a href="#" class="tag" data-filter-topic="Technology">Technology</a>
+<a href="#" class="tag" data-filter-topic="AI">AI</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">Oliver Wyman</span><span class="dot"></span>31 Aug 2026<span class="dot"></span>3 min read</div>
+      <p class="card-summary">Oliver Wyman&#x27;s 2026 wholesale banking outlook (with Morgan Stanley) projects industry revenues of $650B–$850B by 2030 across macro scenarios, with digital assets identified as a key structural force. The report frames...</p>
+      <div class="card-footer">
+        <a href="articles/digital-assets-reshaping-the-future-of-wholesale-banking.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="Corporate Banking,AI,Technology">
+      <div class="card-title-row">
+        <h3><a href="articles/how-to-win-in-financial-market-infrastructure-through-2030.html">How to win in financial market infrastructure through 2030</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="Corporate Banking">Corporate Banking</a>
+<a href="#" class="tag" data-filter-topic="AI">AI</a>
+<a href="#" class="tag" data-filter-topic="Technology">Technology</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">Oliver Wyman</span><span class="dot"></span>31 Aug 2026<span class="dot"></span>7 min read</div>
+      <p class="card-summary">Oliver Wyman&#x27;s 2026 FMI report analyzes strategic positioning for financial market infrastructure players through 2030, identifying enterprise AI and tokenization as the two forces separating winners from laggards. The...</p>
+      <div class="card-footer">
+        <a href="articles/how-to-win-in-financial-market-infrastructure-through-2030.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="AI,Processes,Change Management">
+      <div class="card-title-row">
+        <h3><a href="articles/managing-ai-transformation-risk-in-erp.html">Managing AI transformation risk in ERP</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="AI">AI</a>
+<a href="#" class="tag" data-filter-topic="Processes">Processes</a>
+<a href="#" class="tag" data-filter-topic="Change Management">Change Management</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">PwC</span><span class="dot"></span>25 Aug 2026<span class="dot"></span>4 min read</div>
+      <p class="card-summary">PwC outlines the governance and control risks that emerge when AI is embedded into ERP and core finance workflows, arguing that traditional deterministic controls are inadequate for probabilistic, agentic AI systems....</p>
+      <div class="card-footer">
+        <a href="articles/managing-ai-transformation-risk-in-erp.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="AI,Change Management,Customer Experience">
+      <div class="card-title-row">
+        <h3><a href="articles/financial-services-future-in-ai-age-known-unknown-debates.html">Financial Services&#x27; Future In AI Age: Known Unknown Debates</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="AI">AI</a>
+<a href="#" class="tag" data-filter-topic="Change Management">Change Management</a>
+<a href="#" class="tag" data-filter-topic="Customer Experience">Customer Experience</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">Oliver Wyman</span><span class="dot"></span>21 Aug 2026<span class="dot"></span>1 min read</div>
+      <p class="card-summary">Oliver Wyman&#x27;s report frames AI transformation in financial services as a strategic leadership challenge, not a technology problem. It identifies five critical debates shaping the industry: AI running bank operations,...</p>
+      <div class="card-footer">
+        <a href="articles/financial-services-future-in-ai-age-known-unknown-debates.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="Technology,Processes,Customer Experience">
+      <div class="card-title-row">
+        <h3><a href="articles/flagstar-picks-cloud-native-core-to-replace-legacy-patchwork.html">Flagstar picks cloud-native core to replace legacy patchwork</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="Technology">Technology</a>
+<a href="#" class="tag" data-filter-topic="Processes">Processes</a>
+<a href="#" class="tag" data-filter-topic="Customer Experience">Customer Experience</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">Banking Dive</span><span class="dot"></span>21 Aug 2026<span class="dot"></span>3 min read</div>
+      <p class="card-summary">Flagstar Bank is replacing its legacy patchwork of two core systems with Fiserv&#x27;s Finxact cloud-native platform following a rigorous 12-candidate evaluation process, with migrations planned for 2027-2028. The...</p>
+      <div class="card-footer">
+        <a href="articles/flagstar-picks-cloud-native-core-to-replace-legacy-patchwork.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="AI,Processes,Change Management">
+      <div class="card-title-row">
+        <h3><a href="articles/systems-thinking-the-route-to-scalable-ai.html">Systems thinking: The route to scalable AI</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="AI">AI</a>
+<a href="#" class="tag" data-filter-topic="Processes">Processes</a>
+<a href="#" class="tag" data-filter-topic="Change Management">Change Management</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">Capgemini</span><span class="dot"></span>17 Aug 2026<span class="dot"></span>8 min read</div>
+      <p class="card-summary">This Capgemini article argues that scaling AI requires shifting from component engineering to systems engineering — understanding AI not as discrete tools but as interconnected, emergent networks of agents, humans,...</p>
+      <div class="card-footer">
+        <a href="articles/systems-thinking-the-route-to-scalable-ai.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="Retail Banking,Change Management,Customer Experience">
+      <div class="card-title-row">
+        <h3><a href="articles/american-banks-left-the-door-open-european-fintechs-are-walking-in.html">American Banks Left the Door Open. European Fintechs Are Walking In.</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="Retail Banking">Retail Banking</a>
+<a href="#" class="tag" data-filter-topic="Change Management">Change Management</a>
+<a href="#" class="tag" data-filter-topic="Customer Experience">Customer Experience</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">Global Finance</span><span class="dot"></span>10 Aug 2026<span class="dot"></span>4 min read</div>
+      <p class="card-summary">This article argues that European fintechs like Revolut are better positioned than U.S. incumbents to compete globally because they&#x27;ve been forged in the regulatory and cultural complexity of fragmented European...</p>
+      <div class="card-footer">
+        <a href="articles/american-banks-left-the-door-open-european-fintechs-are-walking-in.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="AI,Customer Experience,Change Management">
+      <div class="card-title-row">
+        <h3><a href="articles/from-share-of-wallet-to-share-of-trust-euromoney.html">From share of wallet to share of trust - Euromoney</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="AI">AI</a>
+<a href="#" class="tag" data-filter-topic="Customer Experience">Customer Experience</a>
+<a href="#" class="tag" data-filter-topic="Change Management">Change Management</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">Euromoney</span><span class="dot"></span>31 Jul 2026<span class="dot"></span>5 min read</div>
+      <p class="card-summary">Santander Portugal has built a three-pillar CX architecture — digital intelligence, human proximity, and continuous engagement — that connects AI deployment directly to financial performance, achieving 31.8% RoTE and...</p>
+      <div class="card-footer">
+        <a href="articles/from-share-of-wallet-to-share-of-trust-euromoney.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="AI,Change Management,Processes">
+      <div class="card-title-row">
+        <h3><a href="articles/board-oversight-of-ai-transformation.html">Board oversight of AI transformation</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="AI">AI</a>
+<a href="#" class="tag" data-filter-topic="Change Management">Change Management</a>
+<a href="#" class="tag" data-filter-topic="Processes">Processes</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">PwC</span><span class="dot"></span>31 Jul 2026<span class="dot"></span>2 min read</div>
+      <p class="card-summary">PwC frames AI not as a technology initiative but as an enterprise transformation requiring board-level governance across strategy, capital, talent, and risk. The piece outlines a governance model where boards must...</p>
+      <div class="card-footer">
+        <a href="articles/board-oversight-of-ai-transformation.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="AI,Customer Experience,Processes">
+      <div class="card-title-row">
+        <h3><a href="articles/agentic-front-office-redesigning-commercial-operations-with-ai.html">Agentic front office: Redesigning commercial operations with AI</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="AI">AI</a>
+<a href="#" class="tag" data-filter-topic="Customer Experience">Customer Experience</a>
+<a href="#" class="tag" data-filter-topic="Processes">Processes</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">PwC</span><span class="dot"></span>29 Jul 2026<span class="dot"></span>4 min read</div>
+      <p class="card-summary">PwC outlines a framework for redesigning commercial front-office operations around AI agents, breaking down silos between marketing, sales, pricing, and customer service into a unified, data-driven system. The model...</p>
+      <div class="card-footer">
+        <a href="articles/agentic-front-office-redesigning-commercial-operations-with-ai.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="AI,Processes,Change Management">
+      <div class="card-title-row">
+        <h3><a href="articles/agentic-ai-governance-risk-and-controls-for-business-leaders.html">Agentic AI Governance, Risk, and Controls for Business Leaders</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="AI">AI</a>
+<a href="#" class="tag" data-filter-topic="Processes">Processes</a>
+<a href="#" class="tag" data-filter-topic="Change Management">Change Management</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">Bain</span><span class="dot"></span>28 Jul 2026<span class="dot"></span>8 min read</div>
+      <p class="card-summary">Bain outlines why traditional AI governance frameworks—intake assessments, review boards, policy documents—are fundamentally insufficient for agentic AI systems that act autonomously at scale. Unlike generative AI...</p>
+      <div class="card-footer">
+        <a href="articles/agentic-ai-governance-risk-and-controls-for-business-leaders.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="Technology,AI,Change Management">
+      <div class="card-title-row">
+        <h3><a href="articles/engineering-for-an-ai-enabled-bank-with-a-heart-euromoney.html">Engineering for an AI-enabled bank with a heart - Euromoney</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="Technology">Technology</a>
+<a href="#" class="tag" data-filter-topic="AI">AI</a>
+<a href="#" class="tag" data-filter-topic="Change Management">Change Management</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">Euromoney</span><span class="dot"></span>27 Jul 2026<span class="dot"></span>3 min read</div>
+      <p class="card-summary">DBS Bank outlines its strategic framework for becoming an &#x27;AI-enabled bank with a heart,&#x27; anchored on a proprietary R.I.S.E. framework (Resilience, Innovation, Security, Efficiency) that embeds trust as an engineering...</p>
+      <div class="card-footer">
+        <a href="articles/engineering-for-an-ai-enabled-bank-with-a-heart-euromoney.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="Processes,Change Management,Corporate Banking">
+      <div class="card-title-row">
+        <h3><a href="articles/managing-transformation-risk-in-divestitures.html">Managing transformation risk in divestitures</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="Processes">Processes</a>
+<a href="#" class="tag" data-filter-topic="Change Management">Change Management</a>
+<a href="#" class="tag" data-filter-topic="Corporate Banking">Corporate Banking</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">PwC</span><span class="dot"></span>24 Jul 2026<span class="dot"></span>4 min read</div>
+      <p class="card-summary">PwC outlines a structured framework for managing transformation risk during divestitures, focusing on four risk concentration areas: regulatory reporting, data/technology/TSAs, program governance, and operating model....</p>
+      <div class="card-footer">
+        <a href="articles/managing-transformation-risk-in-divestitures.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    </div>
+  </section>
+
+  <aside class="sidebar">
+    <div class="sidebar-card">
+      <div class="card-header">
+        <span>&#8593;</span> Trending Topics
+      </div>
+      <div class="card-body">
+                <div class="trending-item">
+          <span class="trending-rank">1</span>
+          <div>
+            <div class="trending-text">AI</div>
+            <div class="trending-count">24 articles</div>
+          </div>
+        </div>        <div class="trending-item">
+          <span class="trending-rank">2</span>
+          <div>
+            <div class="trending-text">Change Management</div>
+            <div class="trending-count">19 articles</div>
+          </div>
+        </div>        <div class="trending-item">
+          <span class="trending-rank">3</span>
+          <div>
+            <div class="trending-text">Processes</div>
+            <div class="trending-count">15 articles</div>
+          </div>
+        </div>        <div class="trending-item">
+          <span class="trending-rank">4</span>
+          <div>
+            <div class="trending-text">Technology</div>
+            <div class="trending-count">10 articles</div>
+          </div>
+        </div>        <div class="trending-item">
+          <span class="trending-rank">5</span>
+          <div>
+            <div class="trending-text">Customer Experience</div>
+            <div class="trending-count">9 articles</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+</main>
+</div>
+
+
+<div class="feed-section" data-feed="greek" id="greekFeed">
+<section class="hero" data-topics="M&amp;A &amp; Strategy,Corporate Banking">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-label">
+        <span class="dot"></span>
+        Featured Story
+      </div>
+      <h2>Χαρδούβελης: Το Χρηματιστήριο Αθηνών περνά στη νέα εποχή με το Euronext - Η αποταμίευση πρέπει να γίνει επένδυση | Ειδήσεις για την Οικονομία | newmoney</h2>
+      <div class="hero-meta">
+        <span class="source">Newmoney</span>
+        <span class="sep"></span>
+        <span>15 Sep 2026</span>
+        <span class="sep"></span>
+        <a href="#" class="hero-tag" data-filter-topic="M&amp;A &amp; Strategy">M&amp;A &amp; Strategy</a> <a href="#" class="hero-tag" data-filter-topic="Corporate Banking">Corporate Banking</a>
+      </div>
+      <p class="hero-excerpt">Ο Πρόεδρος της NBG Γκίκας Χαρδούβελης μίλησε στην εκδήλωση για την 150η επέτειο του Χρηματιστηρίου Αθηνών, τονίζοντας την ένταξή του στο Euronext ως ορόσημο μετασχηματισμού για τις ελληνικές κεφαλαιαγορές. Περιέγραψε τέσσερις μεγάλες προκλήσεις: τη χρηματοδότηση της ανάπτυξης, την ενοποίηση των ευρωπαϊκών κεφαλαιαγορών, την υιοθέτηση της τεχνολογίας και την πλοήγηση στις γεωπολιτικές αλλαγές. Ο Χαρδούβελης υπογράμμισε ότι η βασική αποστολή παραμένει η μετατροπή των ελληνικών αποταμιεύσεων σε παραγωγικές επενδύσεις, ιδίως για νεοφυείς επιχειρήσεις, εξαγωγείς και καινοτόμες επιχειρήσεις.</p>
+      <a href="articles/nbg-150-euronext.html" class="hero-cta">
+        Read Full Article
+        <span class="arrow">&rarr;</span>
+      </a>
+    </div>
+    <aside class="hero-sidebar">
+      <h3>This Edition at a Glance</h3>
+            <div class="quick-stat">
+        <span class="number">4</span>
+        <span class="qs-label">New articles this week</span>
+      </div>
+      <div class="quick-stat">
+        <span class="number">5</span>
+        <span class="qs-label">Topics covered</span>
+      </div>
+      <div class="quick-stat">
+        <span class="number">47%</span>
+        <span class="qs-label">Focus on M&amp;A &amp; Strategy</span>
+      </div>
+    </aside>
+  </div>
+</section>
+<main class="main-container">
+  <section class="article-feed">
+
+    <div class="feed-header">
+      <span class="feed-count"><strong>4 new articles</strong> this week</span>
+      <span class="feed-count">Newest first</span>
+    </div>
+    <div class="article-list">
+    <article class="article-card" data-topics="Corporate Banking,Retail Banking,M&amp;A &amp; Strategy">
+      <div class="card-title-row">
+        <h3><a href="articles/9-5-billion-9m-eurobank-2-7bn-h1-4-5bn-alpha-bank-2-2bn-nbg-2-1bn-piraeus-1-7bn.html">Ασταμάτητες οι τράπεζες στα εταιρικά δάνεια, 9,5 δισ. ευρώ στο 9μηνο – Ενέργεια, υποδομές και ναυτιλία η νέα «ατμομηχανή»</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="Corporate Banking">Corporate Banking</a>
+<a href="#" class="tag" data-filter-topic="Retail Banking">Retail Banking</a>
+<a href="#" class="tag" data-filter-topic="M&amp;A &amp; Strategy">M&amp;A &amp; Strategy</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">BankingNews.gr</span><span class="dot"></span>15 Sep 2026<span class="dot"></span>5 min read</div>
+      <p class="card-summary">Οι ελληνικές τράπεζες διατηρούν ισχυρή δυναμική στα εταιρικά δάνεια, με καθαρή πιστωτική επέκταση που ανήλθε σε €9.5 billion κατά την εννεάμηνη περίοδο (9M). Και οι τέσσερις συστημικές τράπεζες βρίσκονται σε τροχιά...</p>
+      <div class="card-footer">
+        <a href="articles/9-5-billion-9m-eurobank-2-7bn-h1-4-5bn-alpha-bank-2-2bn-nbg-2-1bn-piraeus-1-7bn.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="M&amp;A &amp; Strategy,Regulation">
+      <div class="card-title-row">
+        <h3><a href="articles/national-bank-of-greece-nbg-11-580-849-17-1-27-ssm-174-2025-2025-2026-12-6171-14.html">Εθνική Τράπεζα: Στις 17/9 η διαγραφή 11,5 εκατ. ιδίων μετοχών</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="M&amp;A &amp; Strategy">M&amp;A &amp; Strategy</a>
+<a href="#" class="tag" data-filter-topic="Regulation">Regulation</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">BankingNews.gr</span><span class="dot"></span>14 Sep 2026<span class="dot"></span>4 min read</div>
+      <p class="card-summary">Η National Bank of Greece (NBG) ανακοίνωσε τη διαγραφή 11,580,849 ιδίων μετοχών στις 17 Σεπτεμβρίου, που αντιπροσωπεύουν περίπου το 1.27% του μετοχικού της κεφαλαίου, στο πλαίσιο ενός προγράμματος επαναγοράς...</p>
+      <div class="card-footer">
+        <a href="articles/national-bank-of-greece-nbg-11-580-849-17-1-27-ssm-174-2025-2025-2026-12-6171-14.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="M&amp;A &amp; Strategy">
+      <div class="card-title-row">
+        <h3><a href="articles/alpha-bank-3-152-886-euronext-athens-7-11-2026-4-716-14-87-26-2026-alpha-bank-6-.html">Alpha Bank: Αγοράστηκαν 3,1 εκατ. ίδιες μετοχές συνολικού κόστους 14,8 εκατ. ευρώ</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="M&amp;A &amp; Strategy">M&amp;A &amp; Strategy</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">BankingNews.gr</span><span class="dot"></span>14 Sep 2026<span class="dot"></span>1 min read</div>
+      <p class="card-summary">Η Alpha Bank αγόρασε 3.152.886 ίδιες μετοχές στο Euronext Athens κατά την περίοδο 7–11 Σεπτεμβρίου 2026, σε μέση τιμή €4,716 ανά μετοχή και συνολικό κόστος περίπου €14,87 εκατομμυρίων. Η συναλλαγή αυτή πραγματοποιήθηκε...</p>
+      <div class="card-footer">
+        <a href="articles/alpha-bank-3-152-886-euronext-athens-7-11-2026-4-716-14-87-26-2026-alpha-bank-6-.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="Regulation,Digital Transformation,M&amp;A &amp; Strategy">
+      <div class="card-title-row">
+        <h3><a href="articles/hcmc-9-ai-tokenization-crypto-assets-mica-eurogroup-8-hcmc.html">Συμπόσιο της Επιτροπής Κεφαλαιαγοράς στις 9 Σεπτεμβρίου</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="Regulation">Regulation</a>
+<a href="#" class="tag" data-filter-topic="Digital Transformation">Digital Transformation</a>
+<a href="#" class="tag" data-filter-topic="M&amp;A &amp; Strategy">M&amp;A &amp; Strategy</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">Euro2day</span><span class="dot"></span>07 Sep 2026<span class="dot"></span>3 min read</div>
+      <p class="card-summary">Η Επιτροπή Κεφαλαιαγοράς (HCMC) διοργανώνει το Επετειακό Συμπόσιό της στις 9 Σεπτεμβρίου στην Αθήνα, με θέμα &#x27;Το Μέλλον των Κεφαλαιαγορών: Τιμώντας την Κανονιστική Πρόοδο και Σχεδιάζοντας τη Νέα Εποχή.&#x27; Η εκδήλωση θα...</p>
+      <div class="card-footer">
+        <a href="articles/hcmc-9-ai-tokenization-crypto-assets-mica-eurogroup-8-hcmc.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="M&amp;A &amp; Strategy,Retail Banking,Corporate Banking">
+      <div class="card-title-row">
+        <h3><a href="articles/52-september-4-2026-goldman-sachs-citigroup-ubs-hellenic-financial-stability-fun.html">Γιατί οι διοικήσεις των ελληνικών τραπεζών πουλάνε μετοχές; - Τι θέλει η Goldman Sachs 8/9 στην Αθήνα;</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="M&amp;A &amp; Strategy">M&amp;A &amp; Strategy</a>
+<a href="#" class="tag" data-filter-topic="Retail Banking">Retail Banking</a>
+<a href="#" class="tag" data-filter-topic="Corporate Banking">Corporate Banking</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">BankingNews.gr</span><span class="dot"></span>07 Sep 2026<span class="dot"></span>6 min read</div>
+      <p class="card-summary">Οι μετοχές των ελληνικών τραπεζών έφτασαν σε υψηλά 52 εβδομάδων στις September 4, 2026, εν όψει παρουσιάσεων σε επενδυτές που διοργανώθηκαν από Goldman Sachs, Citigroup και UBS, στις οποίες συμμετείχαν και οι τέσσερις...</p>
+      <div class="card-footer">
+        <a href="articles/52-september-4-2026-goldman-sachs-citigroup-ubs-hellenic-financial-stability-fun.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    </div>
+
+    <div class="older-divider">
+      <button class="older-toggle" id="greekOlderToggle" onclick="toggleGreekOlder()">
+        <span id="greekOlderLabel">Show older articles</span>
+        <span class="older-count" id="greekOlderCount">(2)</span>
+        <span class="chevron">&#9660;</span>
+      </button>
+    </div>
+    <div class="older-articles" id="greekOlderArticles">
+    <article class="article-card" data-topics="M&amp;A &amp; Strategy">
+      <div class="card-title-row">
+        <h3><a href="articles/eurobank-1-179-047-31-4-2026-4-6146-5-44-eurobank-equities-euronext-athens-eurob.html">Η Eurobank αγόρασε 1,1 εκατ. ίδιες μετοχές έναντι 5,4 εκατ. ευρώ</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="M&amp;A &amp; Strategy">M&amp;A &amp; Strategy</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">BankingNews.gr</span><span class="dot"></span>07 Sep 2026<span class="dot"></span>1 min read</div>
+      <p class="card-summary">Η Eurobank απέκτησε 1,179,047 ίδιες μετοχές μεταξύ 31 Αυγούστου και 4 Σεπτεμβρίου 2026, σε μέση τιμή €4.6146 ανά μετοχή, με συνολικό κόστος €5.44 εκατ., μέσω της Eurobank Equities στο Euronext Athens. Μετά από αυτές τις...</p>
+      <div class="card-footer">
+        <a href="articles/eurobank-1-179-047-31-4-2026-4-6146-5-44-eurobank-equities-euronext-athens-eurob.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    <article class="article-card" data-topics="M&amp;A &amp; Strategy,Retail Banking">
+      <div class="card-title-row">
+        <h3><a href="articles/alpha-bank-1-746-545-euronext-athens-31-4-2026-4-6371-8-1-3-107-488-0-14-26-2026.html">Alpha Bank: Αγοράστηκαν 1,7 εκατ. ίδιες μετοχές με μέση τιμή 4,6371 ευρώ ανά μετοχή</a></h3>
+        <div class="card-tags-inline">
+          <a href="#" class="tag" data-filter-topic="M&amp;A &amp; Strategy">M&amp;A &amp; Strategy</a>
+<a href="#" class="tag" data-filter-topic="Retail Banking">Retail Banking</a>
+        </div>
+      </div>
+      <div class="card-meta"><span class="source-name">BankingNews.gr</span><span class="dot"></span>07 Sep 2026<span class="dot"></span>1 min read</div>
+      <p class="card-summary">Η Alpha Bank αγόρασε 1,746,545 ίδιες μετοχές στο Euronext Athens μεταξύ 31 Αυγούστου και 4 Σεπτεμβρίου 2026, σε μέση τιμή €4.6371 ανά μετοχή, με συνολικό κόστος περίπου €8.1 εκατομμυρίων. Μετά από αυτές τις συναλλαγές,...</p>
+      <div class="card-footer">
+        <a href="articles/alpha-bank-1-746-545-euronext-athens-31-4-2026-4-6371-8-1-3-107-488-0-14-26-2026.html" class="read-more">Read more <span>&rarr;</span></a>
+      </div>
+    </article>
+    </div>
+  </section>
+  <aside class="sidebar">
+    <div class="sidebar-card">
+      <div class="card-header">
+        <span>&#8593;</span> Trending Topics
+      </div>
+      <div class="card-body">
+                <div class="trending-item">
+          <span class="trending-rank">1</span>
+          <div>
+            <div class="trending-text">M&amp;A &amp; Strategy</div>
+            <div class="trending-count">8 articles</div>
+          </div>
+        </div>        <div class="trending-item">
+          <span class="trending-rank">2</span>
+          <div>
+            <div class="trending-text">Corporate Banking</div>
+            <div class="trending-count">3 articles</div>
+          </div>
+        </div>        <div class="trending-item">
+          <span class="trending-rank">3</span>
+          <div>
+            <div class="trending-text">Retail Banking</div>
+            <div class="trending-count">3 articles</div>
+          </div>
+        </div>        <div class="trending-item">
+          <span class="trending-rank">4</span>
+          <div>
+            <div class="trending-text">Regulation</div>
+            <div class="trending-count">2 articles</div>
+          </div>
+        </div>        <div class="trending-item">
+          <span class="trending-rank">5</span>
+          <div>
+            <div class="trending-text">Digital Transformation</div>
+            <div class="trending-count">1 article</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+</main>
+</div>
+
+
+<script>
+(function() {
+  var tabs = document.querySelectorAll('.feed-tab');
+  var sections = document.querySelectorAll('.feed-section');
+  var saved = localStorage.getItem('activeTab') || 'global';
+
+  function switchTab(feed) {
+    tabs.forEach(function(t) {
+      t.classList.toggle('active', t.getAttribute('data-feed') === feed);
+    });
+    sections.forEach(function(s) {
+      s.classList.toggle('active', s.getAttribute('data-feed') === feed);
+    });
+    localStorage.setItem('activeTab', feed);
+  }
+
+  switchTab(saved);
+
+  tabs.forEach(function(t) {
+    t.addEventListener('click', function() {
+      switchTab(this.getAttribute('data-feed'));
+    });
+  });
+})();
+
+function toggleGreekOlder() {
+  var section = document.getElementById('greekOlderArticles');
+  var btn = document.getElementById('greekOlderToggle');
+  var label = document.getElementById('greekOlderLabel');
+  var count = document.getElementById('greekOlderCount');
+  if (!section) return;
+  var isVisible = section.classList.contains('visible');
+  section.classList.toggle('visible');
+  btn.classList.toggle('expanded');
+  if (isVisible) {
+    label.textContent = 'Show older articles';
+    count.style.display = '';
+  } else {
+    label.textContent = 'Hide older articles';
+    count.style.display = 'none';
+  }
+}
+</script>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">National Bank of Greece &mdash; Corporate Transformation Division</div>
+    <div class="footer-right">
+      <span>Powered by AI-assisted curation</span>
+      <span class="footer-dot"></span>
+      <span>Internal use only</span>
+    </div>
+  </div>
+</footer>
+<script>
+function toggleTheme() {
+  var html = document.documentElement;
+  var next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+}
+(function(){
+  var d = document.getElementById('current-date');
+  if (d) {
+    var now = new Date();
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    d.textContent = String(now.getDate()).padStart(2,'0') + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transformation Digest | NBG</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --deep-teal: #003841;
+  --nbg-teal: #007B85;
+  --medium-teal: #00ADBF;
+  --light-cyan: #ffffff;
+  --font: 'IBM Plex Sans', 'Aptos', 'Calibri', 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+[data-theme="light"] {
+  --bg: #f5f8f6;
+  --bg-card: #ffffff;
+  --bg-surface: #f0f3f1;
+  --text-primary: #1a1a1a;
+  --text-secondary: #5a5f65;
+  --text-muted: #939793;
+  --border: rgba(190, 193, 190, 0.4);
+  --tag-bg: #f0f4f3;
+  --tag-text: #007B85;
+  --header-bg: var(--deep-teal);
+  --header-text: #ffffff;
+  --header-muted: rgba(255,255,255,.65);
+  --footer-bg: #003841;
+  --footer-text: rgba(255,255,255,.6);
+  --insight-bg: linear-gradient(135deg, rgba(0,123,133,.06) 0%, rgba(0,173,191,.04) 100%);
+  --insight-text: var(--deep-teal);
+  --article-text: #2a2a2a;
+}
+
+[data-theme="dark"] {
+  --bg: #0f1419;
+  --bg-card: #1c2128;
+  --bg-surface: #161b22;
+  --text-primary: #e6edf3;
+  --text-secondary: #8b949e;
+  --text-muted: #6e7681;
+  --border: #30363d;
+  --tag-bg: rgba(0, 123, 133, .15);
+  --tag-text: #00ADBF;
+  --header-bg: #0b0e12;
+  --header-text: #e6edf3;
+  --header-muted: #6e7681;
+  --footer-bg: #0b0e12;
+  --footer-text: #6e7681;
+  --insight-bg: linear-gradient(135deg, rgba(0,123,133,.12) 0%, rgba(0,173,191,.08) 100%);
+  --insight-text: #e6edf3;
+  --article-text: #c9d1d9;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text-primary);
+  background: var(--bg);
+  transition: background .3s, color .3s;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--nbg-teal); text-decoration: none; transition: color .2s; }
+[data-theme="dark"] a { color: var(--medium-teal); }
+a:hover { color: var(--medium-teal); }
+
+/* ── ACCENT LINE ── */
+.accent-line {
+  height: 3px;
+  background: linear-gradient(90deg, var(--deep-teal), var(--nbg-teal), var(--medium-teal));
+}
+
+/* ── HEADER ── */
+.site-header {
+  background: var(--header-bg);
+  color: var(--header-text);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(0, 56, 65, 0.25);
+  transition: background .3s;
+}
+
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 18px 32px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header-logo {
+  width: 40px;
+  height: 40px;
+  background: var(--nbg-teal);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 15px;
+  color: #fff;
+  flex-shrink: 0;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+}
+
+.header-text h1 {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -.2px;
+  line-height: 1.2;
+}
+
+.header-text h1 a { color: inherit; }
+
+.header-text .subtitle {
+  font-size: 13px;
+  color: var(--header-muted);
+  font-weight: 400;
+  margin-top: 2px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.theme-toggle {
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 20px;
+  width: 52px;
+  height: 28px;
+  cursor: pointer;
+  position: relative;
+  transition: background .3s, border-color .3s;
+  flex-shrink: 0;
+}
+
+.theme-toggle::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  background: var(--light-cyan);
+  border-radius: 50%;
+  transition: transform .3s;
+}
+
+[data-theme="dark"] .theme-toggle::after {
+  transform: translateX(24px);
+}
+
+.theme-toggle .icon-sun,
+.theme-toggle .icon-moon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 13px;
+  line-height: 1;
+  color: rgba(255,255,255,.7);
+}
+
+.theme-toggle .icon-sun { left: 7px; }
+.theme-toggle .icon-moon { right: 7px; }
+
+/* ── ARTICLE DETAIL ── */
+.detail-container {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 40px 32px 64px;
+}
+
+.detail-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--nbg-teal);
+  margin-bottom: 32px;
+  transition: gap .2s;
+}
+
+[data-theme="dark"] .detail-back { color: var(--medium-teal); }
+.detail-back:hover { gap: 10px; color: var(--medium-teal); }
+
+.detail-title {
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+  margin-bottom: 20px;
+  letter-spacing: -.3px;
+}
+
+.detail-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+  font-size: 14px;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+}
+
+.detail-meta .source-name {
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.detail-meta .sep {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--text-muted);
+}
+
+.detail-topics {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+
+.tag {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 4px;
+  background: var(--tag-bg);
+  color: var(--tag-text);
+  letter-spacing: .2px;
+}
+
+/* Key Insight box */
+.detail-insight {
+  background: var(--insight-bg);
+  border-left: 4px solid var(--nbg-teal);
+  border-radius: 0 10px 10px 0;
+  padding: 24px 28px;
+  margin-bottom: 36px;
+}
+
+.detail-insight .insight-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--nbg-teal);
+  margin-bottom: 10px;
+}
+
+[data-theme="dark"] .detail-insight .insight-label { color: var(--medium-teal); }
+
+.detail-insight p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--insight-text);
+  font-weight: 500;
+}
+
+/* Section label */
+.detail-section-label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--nbg-teal);
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+[data-theme="dark"] .detail-section-label { color: var(--medium-teal); }
+
+/* Article body */
+.detail-article-body {
+  margin-bottom: 40px;
+}
+
+.detail-article-body p {
+  font-size: 16px;
+  line-height: 1.85;
+  color: var(--article-text);
+  margin-bottom: 18px;
+}
+
+.detail-article-body p:last-child { margin-bottom: 0; }
+
+/* Subheadings within article */
+.detail-article-body p strong,
+.detail-article-body h4 {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* Source CTA button */
+.detail-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: var(--nbg-teal);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: background .2s, transform .15s;
+}
+
+.detail-cta:hover {
+  background: var(--deep-teal);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+[data-theme="dark"] .detail-cta { background: var(--medium-teal); color: var(--deep-teal); }
+[data-theme="dark"] .detail-cta:hover { background: var(--light-cyan); color: var(--deep-teal); }
+
+.detail-cta .arrow { font-size: 18px; transition: transform .2s; }
+.detail-cta:hover .arrow { transform: translateX(4px); }
+
+/* ── FOOTER ── */
+.site-footer {
+  background: var(--footer-bg);
+  color: var(--footer-text);
+  text-align: center;
+  padding: 28px 32px;
+  font-size: 13px;
+  transition: background .3s;
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-brand { font-weight: 500; color: rgba(255,255,255,.7); }
+[data-theme="dark"] .footer-brand { color: #8b949e; }
+
+.footer-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 12px;
+}
+
+.footer-dot {
+  width: 3px;
+  height: 3px;
+  background: rgba(255,255,255,.3);
+  border-radius: 50%;
+}
+
+[data-theme="dark"] .footer-dot { background: #30363d; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 640px) {
+  .header-inner { padding: 16px; }
+  .header-text h1 { font-size: 17px; }
+  .header-text .subtitle { display: none; }
+  .detail-container { padding: 24px 16px 48px; }
+  .detail-title { font-size: 26px; }
+  .detail-insight { padding: 20px 20px; }
+  .detail-article-body p { font-size: 15px; }
+  .footer-inner { flex-direction: column; gap: 8px; }
+}
+</style>
+</head>
+<body>
+
+<div class="accent-line"></div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="header-left">
+      <div class="header-logo">NBG</div>
+      <div class="header-text">
+        <h1><a href="mockup_v2.html">Transformation Digest</a></h1>
+        <div class="subtitle">Corporate Transformation Division | National Bank of Greece</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+        <span class="icon-sun">&#9788;</span>
+        <span class="icon-moon">&#9790;</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="detail-container">
+  <a href="mockup_v2.html" class="detail-back"><span>&larr;</span> Back to Digest</a>
+
+  <h1 class="detail-title">From share of wallet to share of trust</h1>
+
+  <div class="detail-meta">
+    <span class="source-name">Euromoney</span>
+    <span class="sep"></span>
+    <span>31 Jul 2026</span>
+    <span class="sep"></span>
+    <span>5 min read</span>
+  </div>
+
+  <div class="detail-topics">
+    <span class="tag">AI</span>
+    <span class="tag">Customer Experience</span>
+    <span class="tag">Change Management</span>
+  </div>
+
+  <div class="detail-insight">
+    <div class="insight-label">Key Insight</div>
+    <p>Federated AI development &mdash; empowering business teams closest to customers to build their own AI use cases within a governed framework &mdash; delivers faster adoption, higher relevance, and measurable performance gains than centralizing AI in a technology function.</p>
+  </div>
+
+  <div class="detail-section-label">Full Article</div>
+  <div class="detail-article-body">
+    <p>When Santander Portugal was named the country's best bank at this year's Euromoney Awards for Excellence, numbers did much of the talking. A record return on tangible equity of 31.8%, net profit of &euro;963.8 million and an efficiency ratio of 28% in 2025, well ahead of the sector average, were all impressive.</p>
+
+    <p>But the bank's own reading of those results starts somewhere less obvious than the financial metrics. "Customer experience is one of the most powerful drivers of sustainable financial performance because it creates the foundations for primary, long-term relationships with our customers," says Isabel Guerreiro, CEO at Santander Portugal.</p>
+
+    <p>A year ago, Santander Portugal described to Euromoney how artificial intelligence was being used to restore, rather than erode, the human touch in banking. That thesis has since been broadened. What was a technology argument has become an architecture, built around three connected dimensions: digital intelligence, human proximity and continuous engagement.</p>
+
+    <p>Together, they seek to answer a simple question: how can a bank become more relevant in customers' lives while delivering superior business performance?</p>
+
+    <p><strong>Digital intelligence: from efficiency to relevance</strong></p>
+
+    <p>Artificial intelligence is no longer confined to a central technology function. More than 430 AI agents and use cases are now live across Santander Portugal, many of them developed by the business teams closest to customers rather than by technology specialists alone.</p>
+
+    <p>"The best AI use cases often come from the people who know the customers, the processes and the friction points best. What we have done is give those teams the tools, confidence and framework to turn their knowledge into practical solutions," says Hugo Preto, Chief Data &amp; Artificial Intelligence Officer, Processes &amp; Operations at Santander Portugal.</p>
+
+    <p>The impact is visible throughout the organisation. AI and automation now support a wide range of high-volume interactions, with success rates above 85% in priority use cases. In the contact centre, intent-recognition and call-routing capabilities support more than 150,000 calls each month, while the bank's AI-powered voice agent, Alice, took over all outbound calling activity within three weeks of launch, increasing contact-centre capacity by 60%.</p>
+
+    <p>On the commercial side, more than 90% of sales now fall within the top three recommendations generated by the next-best-offer model.</p>
+
+    <p><strong>Human proximity: the branch as a place to stay</strong></p>
+
+    <p>As automation absorbs routine transactions, Santander Portugal is redefining the role of the physical network: less as a place for operations and more as a platform for advice, community and relationship-building.</p>
+
+    <p>The clearest expression of that strategy is the WorkCaf&eacute; model &ndash; part branch, part caf&eacute; and part co-working space, open to customers and non-customers alike. Santander Portugal added five new WorkCaf&eacute;s this year, two in Lisbon and one each in Aveiro, Porto and Leiria, and plans to reach a network of 30 locations by the end of 2027.</p>
+
+    <p>"People sometimes call the WorkCaf&eacute; a financial coffee shop, and the image is charming, but it misses most of the point. What makes it work is the mix of people who walk through the door," says Miguel Teixeira Santos, Chief Communications Officer.</p>
+
+    <p><strong>Continuous value: the Rewards layer</strong></p>
+
+    <p>The newest dimension of the strategy is Santander Rewards, a loyalty ecosystem designed to make banking more useful and relevant in customers' everyday lives. It is also the largest programme of its kind in Portuguese banking, bringing together more than 500 partners and over 100,000 redemption possibilities.</p>
+
+    <p>The financial impact of that model is already visible. Customer loans reached &euro;54.1 billion at the end of 2025, up 8.9% year-on-year. The active customer base grew by 40,000 to 1.94 million, with digital customers up 5.1% to 1.33 million.</p>
+
+    <p>The connecting thread is the ambition to build a more personal bank at greater scale. AI, WorkCaf&eacute;s and Rewards are different expressions of a strategy to become more relevant, more present and more useful in customers' lives.</p>
+
+    <p>For the bank's CEO, "Primary banking relationships are about being the bank customers turn to first when they need to decide, solve, pay, save, invest or plan for the future. They are about share of trust, relevance and presence in the defining moments in their lives."</p>
+  </div>
+
+  <a href="https://www.euromoney.com/article/cnts1kb7weg4sosgw4cc0gog4/from-share-of-wallet-to-share-of-trust/" target="_blank" rel="noopener noreferrer" class="detail-cta">
+    Read Original Source <span class="arrow">&rarr;</span>
+  </a>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">National Bank of Greece &mdash; Corporate Transformation Division</div>
+    <div class="footer-right">
+      <span>Powered by AI-assisted curation</span>
+      <span class="footer-dot"></span>
+      <span>Internal use only</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleTheme() {
+  var html = document.documentElement;
+  var current = html.getAttribute('data-theme');
+  html.setAttribute('data-theme', current === 'light' ? 'dark' : 'light');
+}
+</script>
+
+</body>
+</html>
